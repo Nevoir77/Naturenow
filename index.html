@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Nature Message</title>
+    <title>Naturenow</title>
     
     <!-- PWA Meta Tags -->
     <meta name="description" content="Daily messages about the natural world and climate change impacts">
@@ -47,10 +47,40 @@
             backdrop-filter: blur(10px);
             text-align: center;
             transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            touch-action: pan-y;
         }
 
         .container:hover {
             transform: translateY(-5px);
+        }
+
+        .swipe-hint {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 12px;
+            color: #999;
+            opacity: 0.7;
+        }
+
+        .learn-more {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 16px;
+            background: rgba(52, 152, 219, 0.1);
+            color: #2980b9;
+            text-decoration: none;
+            border-radius: 15px;
+            font-size: 14px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .learn-more:hover {
+            background: rgba(52, 152, 219, 0.2);
+            transform: translateY(-1px);
         }
 
         .date {
@@ -133,169 +163,103 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="mainContainer">
+        <div class="swipe-hint">Swipe ← →</div>
         <div class="date" id="currentDate"></div>
         <div class="message" id="dailyMessage">Loading your daily nature message...</div>
         <div class="phenology-info" id="phenologyInfo">
-            <span class="phenology-label">Climate Impact</span>
+            <span class="phenology-label">Impacts of a changing climate</span>
             Loading phenology information...
         </div>
-        <button class="refresh-btn" onclick="showYesterday()">Yesterday</button>
     </div>
 
     <script>
         const natureMessages = [
             {
-                message: "Today, monarch butterflies are beginning their incredible 3,000-mile migration south, guided by instincts passed down through generations.",
-                phenology: "Climate change is shifting migration timing by 4-6 days earlier per decade. Some monarchs now struggle to find food sources that bloom later.",
-                icon: "🦋"
+                date: "1st May",
+                message: "Female cuckoos are arriving",
+                phenology: "Cuckoos now arrive 5-7 days earlier than in the 1960s, but their host species' breeding timing hasn't shifted equally.",
+                icon: "🐦",
+                link: "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/cuckoo/",
+                linkText: "cuckoos"
             },
             {
-                message: "In forests around the world, trees are quietly sharing nutrients through underground fungal networks, supporting their community.",
-                phenology: "Warmer temperatures are extending growing seasons by 10-14 days, but this disrupts the synchronized timing of forest communities.",
-                icon: "🌳"
+                date: "2nd May",
+                message: "The first nightjars arrive, churring and wing clapping at dusk",
+                phenology: "Nightjars arrive 8-10 days earlier than historical records, but their insect prey peaks haven't shifted as much.",
+                icon: "🌙",
+                link: "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/nightjar/",
+                linkText: "nightjars"
             },
             {
-                message: "Somewhere today, a seed that has waited months in the soil is pushing its first green shoot toward the light.",
-                phenology: "Spring leaf-out now occurs 7-10 days earlier than 50 years ago, but not all species are advancing at the same rate.",
-                icon: "🌱"
+                date: "3rd May",
+                message: "Wild bluebells are in full flower in the woods",
+                phenology: "Bluebells now flower 2-3 weeks earlier than in the 1950s, shortening their blooming period and affecting woodland ecology.",
+                icon: "🌸",
+                link: "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/plants/wild-flowers/bluebell/",
+                linkText: "bluebells"
             },
             {
-                message: "Ocean tides are rising and falling in their ancient rhythm, moving billions of gallons of water across our planet.",
-                phenology: "While tides remain constant, warmer oceans are changing when marine species reproduce and migrate, disrupting coastal ecosystems.",
-                icon: "🌊"
+                date: "4th May",
+                message: "Young tawny owls may be calling now, before they have broken out of their egg",
+                phenology: "Tawny owl breeding is advancing by 4-5 days per decade, but their rodent prey availability timing is shifting differently.",
+                icon: "🦉",
+                link: "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/tawny-owl/",
+                linkText: "tawny owls"
             },
             {
-                message: "Honeybees are visiting up to 2,000 flowers today, carrying pollen that will become the fruits and vegetables we eat.",
-                phenology: "Flowers are blooming 2-3 weeks earlier, but bee emergence hasn't kept pace, creating pollination gaps that threaten food security.",
-                icon: "🐝"
+                date: "5th May",
+                message: "The first young grebes have hatched and are carried on the backs of their parents",
+                phenology: "Great crested grebes breed 6-8 days earlier than in the 1970s, but warmer waters affect their fish food availability.",
+                icon: "🐣",
+                link: "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/great-crested-grebe/",
+                linkText: "grebes"
             },
             {
-                message: "Cherry trees are blooming in a spectacular display of pink and white, following an ancient rhythm perfected over millions of years.",
-                phenology: "Cherry blossoms in Japan now peak 11 days earlier than in the 1950s - the earliest in 1,200 years of records.",
-                icon: "🌸"
+                date: "6th May",
+                message: "Spotted flycatchers are arriving from Africa",
+                phenology: "Spotted flycatchers arrive 3-4 days earlier than in the 1960s, but their aerial insect prey peaks are shifting unpredictably.",
+                icon: "🐦",
+                link: "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/spotted-flycatcher/",
+                linkText: "Spotted flycatchers"
             },
             {
-                message: "Today, billions of microscopic phytoplankton in our oceans are producing the oxygen in every other breath you take.",
-                phenology: "Ocean warming is shifting phytoplankton blooms earlier, disrupting marine food webs and changing carbon cycling patterns.",
-                icon: "🌊"
+                date: "7th May",
+                message: "The rare golden orieole's fluting sound may be heard",
+                phenology: "Golden orioles arrive 7-9 days earlier than historical records, but habitat loss compounds timing disruption challenges.",
+                icon: "🎵",
+                link: "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/golden-oriole/",
+                linkText: "golden orieole"
             },
             {
-                message: "A hummingbird's heart is beating up to 1,260 times per minute as it hovers at flowers, defying gravity with pure determination.",
-                phenology: "Hummingbirds are arriving at breeding grounds 12 days earlier than in the 1970s, sometimes before their flower food sources bloom.",
-                icon: "🐦"
+                date: "8th May",
+                message: "Oaks are in flower, producing a lot of pollen",
+                phenology: "Oak flowering advances 2-3 days per decade, extending pollen seasons and affecting both wildlife and human allergies.",
+                icon: "🌳",
+                link: "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/british-trees/a-z-of-british-trees/english-oak/",
+                linkText: "Oaks"
             },
             {
-                message: "Maple trees are tapping into their stored sugars, beginning the sweet flow that will become syrup in a few weeks.",
-                phenology: "Maple syrup season now starts 6-8 days earlier but ends sooner due to warming, reducing overall production time.",
-                icon: "🍁"
+                date: "9th May",
+                message: "Holly blue butterfiles are on the wing",
+                phenology: "Holly blues emerge 8-12 days earlier than in the 1980s, risking mismatch with their host plants' optimal timing.",
+                icon: "🦋",
+                link: "https://butterfly-conservation.org/butterflies/holly-blue",
+                linkText: "Holly blue butterfiles"
             },
             {
-                message: "Somewhere, a bird is migrating thousands of miles using magnetic fields and star patterns as ancient as the continents.",
-                phenology: "Bird migration is advancing 2-6 days per decade, but many species aren't keeping up with earlier insect emergence at breeding sites.",
-                icon: "🐦"
-            },
-            {
-                message: "Today, somewhere, a wolf pack is working together to hunt, their ancient cooperation echoing through millennia.",
-                phenology: "Earlier snowmelt in northern regions is changing prey availability, forcing wolves to adapt their hunting patterns and timing.",
-                icon: "🐺"
-            },
-            {
-                message: "A glacier is slowly carving the landscape, shaping valleys and mountains with the patient power of ice and time.",
-                phenology: "Glaciers are melting 2-3 times faster than historical rates, altering river flows and seasonal water availability downstream.",
-                icon: "🏔️"
-            },
-            {
-                message: "Wildflowers are carpeting meadows in brilliant colors, each species timing its bloom to perfection.",
-                phenology: "Alpine wildflowers now bloom 2-3 weeks earlier than in the 1970s, compressing the flowering season and affecting pollinators.",
-                icon: "🌻"
-            },
-            {
-                message: "The moon's gravity is pulling our oceans right now, creating tides that have shaped coastlines for billions of years.",
-                phenology: "Rising seas and changing storm patterns are altering when and how coastal species reproduce and feed with the tides.",
-                icon: "🌙"
-            },
-            {
-                message: "A spider somewhere is spinning silk stronger than steel, creating an architectural marvel with just its body.",
-                phenology: "Warmer temperatures are extending spider activity seasons, but their insect prey emergence times are shifting differently.",
-                icon: "🕷️"
-            },
-            {
-                message: "Today, mycelium networks beneath your feet are connecting forest plants, sharing information and resources you can't see.",
-                phenology: "Fungal networks are becoming active earlier in spring, but this doesn't always match when trees need the most support.",
-                icon: "🍄"
-            },
-            {
-                message: "Somewhere, a whale is singing a song that can travel hundreds of miles through the ocean depths.",
-                phenology: "Whales are arriving at feeding grounds 1-2 weeks earlier as Arctic ice melts sooner, but their food sources may not be ready.",
-                icon: "🐋"
-            },
-            {
-                message: "The sun is fusing 600 million tons of hydrogen into helium every second, powering all life on our planet.",
-                phenology: "While the sun remains constant, earlier springs mean plants start photosynthesis sooner but face more frost risk.",
-                icon: "☀️"
-            },
-            {
-                message: "A robin is singing its morning song, marking territory with melodies that have echoed through countless springs.",
-                phenology: "Robins now arrive 12 days earlier than in the 1960s, but their insect food sources aren't always ready when they arrive.",
-                icon: "🐦"
-            },
-            {
-                message: "Apple trees are beginning to bud, preparing for blossoms that will become this autumn's harvest.",
-                phenology: "Apple trees bloom 4-6 days earlier per decade, but late frosts can still damage blossoms, threatening harvests.",
-                icon: "🍎"
-            },
-            {
-                message: "A mountain stream is carrying minerals from peaks to valleys, slowly but surely shaping the landscape grain by grain.",
-                phenology: "Earlier snowmelt creates spring floods weeks sooner, changing when fish spawn and how valleys flood naturally.",
-                icon: "🏞️"
-            },
-            {
-                message: "Today, coral polyps are building reefs one tiny calcium carbonate skeleton at a time, creating underwater cities.",
-                phenology: "Warmer ocean temperatures are causing corals to spawn at different times, disrupting reproduction and reef recovery.",
-                icon: "🐠"
-            },
-            {
-                message: "The wind is carrying seeds, spores, and stories across continents, connecting distant ecosystems.",
-                phenology: "Earlier pollen release and longer pollen seasons are affecting both plant reproduction and human allergies worldwide.",
-                icon: "💨"
-            },
-            {
-                message: "A salamander is regenerating a lost limb, performing biological magic that scientists are still trying to understand.",
-                phenology: "Amphibians are breeding 2-3 weeks earlier, but their pond habitats are drying up sooner, threatening tadpole survival.",
-                icon: "🦎"
-            },
-            {
-                message: "Today, somewhere, ancient trees are adding another ring to their trunks, recording this year in their living memory.",
-                phenology: "Tree rings show growing seasons now start earlier and last longer, but drought stress is also increasing in many regions.",
-                icon: "🌲"
-            },
-            {
-                message: "Fireflies are preparing for tonight's light show, each species flashing its unique code in the gathering dusk.",
-                phenology: "Fireflies now emerge 1-2 weeks earlier than decades past, but their light patterns may be disrupted by warmer nights.",
-                icon: "✨"
-            },
-            {
-                message: "A beaver dam is creating wetland habitat, engineering an ecosystem that supports dozens of other species.",
-                phenology: "Earlier ice-out on beaver ponds changes when amphibians breed and when waterfowl nest, affecting wetland communities.",
-                icon: "🦫"
-            },
-            {
-                message: "The Earth's magnetic field is silently protecting us from solar radiation, wrapping our planet in an invisible shield.",
-                phenology: "While magnetic fields stay constant, changing weather patterns are affecting when animals use magnetic navigation for migration.",
-                icon: "🌍"
-            },
-            {
-                message: "Today, lichens are slowly breaking down rocks into soil, performing the patient alchemy that makes gardens possible.",
-                phenology: "Warmer temperatures are speeding lichen growth, but also making them more vulnerable to heat stress and drought.",
-                icon: "🪨"
-            },
-            {
-                message: "A hawk is riding thermals high above, using the Earth's heated air currents to soar effortlessly for miles.",
-                phenology: "Earlier spring warming creates thermal currents sooner, helping raptors migrate earlier but changing prey availability timing.",
-                icon: "🦅"
+                date: "10th May",
+                message: "The last of the summer migrants have arrived : swifts are screaming across the sky",
+                phenology: "Swifts arrive 4-6 days earlier than in the 1960s, but their aerial insect food may not be at peak abundance yet.",
+                icon: "🐦",
+                link: "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/swift/",
+                linkText: "swifts"
             }
         ];
+
+        let currentMessageIndex = 0;
+        let touchStartX = 0;
+        let touchEndX = 0;
 
         function formatDate(date = new Date()) {
             const day = date.getDate();
@@ -315,30 +279,94 @@
             return `${day}${getOrdinalSuffix(day)} ${month}`;
         }
 
-        function getDailyMessage(date = new Date()) {
-            // Use the date as a seed for consistent daily message
-            const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
-            const messageIndex = dayOfYear % natureMessages.length;
-            return natureMessages[messageIndex];
+        function getCurrentMessage() {
+            return natureMessages[currentMessageIndex];
         }
 
-        function showYesterday() {
-            const yesterday = new Date();
-            yesterday.setDate(yesterday.getDate() - 1);
+        function showMessage(index) {
+            const message = natureMessages[index];
+            document.getElementById('currentDate').textContent = message.date;
             
-            document.getElementById('currentDate').textContent = formatDate(yesterday);
-            const yesterdayMessage = getDailyMessage(yesterday);
-            document.getElementById('dailyMessage').textContent = yesterdayMessage.message;
+            // Create message with linked text
+            const messageElement = document.getElementById('dailyMessage');
+            const messageText = message.message;
+            const linkText = message.linkText;
+            
+            if (linkText && messageText.includes(linkText)) {
+                const linkedMessage = messageText.replace(
+                    linkText, 
+                    `<a href="${message.link}" target="_blank" style="color: #2980b9; text-decoration: underline;">${linkText}</a>`
+                );
+                messageElement.innerHTML = linkedMessage;
+            } else {
+                messageElement.textContent = messageText;
+            }
+            
             document.getElementById('phenologyInfo').innerHTML = 
-                `<span class="phenology-label">Climate Impact</span>${yesterdayMessage.phenology}`;
+                `<span class="phenology-label">Impacts of a changing climate</span>${message.phenology}`;
+        }
+
+        function nextMessage() {
+            currentMessageIndex = (currentMessageIndex + 1) % natureMessages.length;
+            showMessage(currentMessageIndex);
+        }
+
+        function previousMessage() {
+            currentMessageIndex = (currentMessageIndex - 1 + natureMessages.length) % natureMessages.length;
+            showMessage(currentMessageIndex);
+        }
+
+        // Touch/Swipe functionality
+        function handleTouchStart(event) {
+            touchStartX = event.touches[0].clientX;
+        }
+
+        function handleTouchMove(event) {
+            event.preventDefault(); // Prevent scrolling
+        }
+
+        function handleTouchEnd(event) {
+            touchEndX = event.changedTouches[0].clientX;
+            handleSwipe();
+        }
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const swipeDistance = touchEndX - touchStartX;
+
+            if (Math.abs(swipeDistance) > swipeThreshold) {
+                if (swipeDistance > 0) {
+                    // Swipe right - go to previous day
+                    previousMessage();
+                } else {
+                    // Swipe left - go to next day
+                    nextMessage();
+                }
+            }
+        }
+
+        // Keyboard navigation
+        function handleKeyPress(event) {
+            if (event.key === 'ArrowLeft') {
+                previousMessage();
+            } else if (event.key === 'ArrowRight') {
+                nextMessage();
+            }
         }
 
         function initializeApp() {
-            document.getElementById('currentDate').textContent = formatDate();
-            const dailyMessage = getDailyMessage();
-            document.getElementById('dailyMessage').textContent = dailyMessage.message;
-            document.getElementById('phenologyInfo').innerHTML = 
-                `<span class="phenology-label">Climate Impact</span>${dailyMessage.phenology}`;
+            // Start with May 1st (index 0)
+            currentMessageIndex = 0;
+            showMessage(currentMessageIndex);
+            
+            // Add touch event listeners
+            const container = document.getElementById('mainContainer');
+            container.addEventListener('touchstart', handleTouchStart, { passive: false });
+            container.addEventListener('touchmove', handleTouchMove, { passive: false });
+            container.addEventListener('touchend', handleTouchEnd, { passive: false });
+            
+            // Add keyboard navigation
+            document.addEventListener('keydown', handleKeyPress);
         }
 
         // Initialize the app when the page loads
