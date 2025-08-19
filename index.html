@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Nature Message</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Daily messages about the natural world and climate change impacts">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Nature Daily">
+    
+    <!-- PWA Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23667eea'/><text x='50%' y='50%' text-anchor='middle' dy='0.3em' font-size='40'>🌿</text></svg>">
+    <link rel="icon" type="image/png" sizes="512x512" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23667eea'/><text x='50%' y='50%' text-anchor='middle' dy='0.3em' font-size='40'>🌿</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23667eea'/><text x='50%' y='50%' text-anchor='middle' dy='0.3em' font-size='40'>🌿</text></svg>">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        .date {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .message {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 400;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .phenology-info {
+            font-size: 16px;
+            color: #7f8c8d;
+            background: rgba(52, 152, 219, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 4px solid #3498db;
+            animation: slideIn 1s ease-in 0.3s both;
+        }
+
+        .phenology-label {
+            font-weight: 600;
+            color: #2980b9;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nature-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        .refresh-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+            
+            .message {
+                font-size: 20px;
+            }
+            
+            .nature-icon {
+                font-size: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="date" id="currentDate"></div>
+        <div class="nature-icon" id="natureIcon">🌿</div>
+        <div class="message" id="dailyMessage">Loading your daily nature message...</div>
+        <div class="phenology-info" id="phenologyInfo">
+            <span class="phenology-label">Climate Impact</span>
+            Loading phenology information...
+        </div>
+        <button class="refresh-btn" onclick="generateNewMessage()">New Message</button>
+    </div>
+
+    <script>
+        const natureMessages = [
+            {
+                message: "Today, monarch butterflies are beginning their incredible 3,000-mile migration south, guided by instincts passed down through generations.",
+                phenology: "Climate change is shifting migration timing by 4-6 days earlier per decade. Some monarchs now struggle to find food sources that bloom later.",
+                icon: "🦋"
+            },
+            {
+                message: "In forests around the world, trees are quietly sharing nutrients through underground fungal networks, supporting their community.",
+                phenology: "Warmer temperatures are extending growing seasons by 10-14 days, but this disrupts the synchronized timing of forest communities.",
+                icon: "🌳"
+            },
+            {
+                message: "Somewhere today, a seed that has waited months in the soil is pushing its first green shoot toward the light.",
+                phenology: "Spring leaf-out now occurs 7-10 days earlier than 50 years ago, but not all species are advancing at the same rate.",
+                icon: "🌱"
+            },
+            {
+                message: "Ocean tides are rising and falling in their ancient rhythm, moving billions of gallons of water across our planet.",
+                phenology: "While tides remain constant, warmer oceans are changing when marine species reproduce and migrate, disrupting coastal ecosystems.",
+                icon: "🌊"
+            },
+            {
+                message: "Honeybees are visiting up to 2,000 flowers today, carrying pollen that will become the fruits and vegetables we eat.",
+                phenology: "Flowers are blooming 2-3 weeks earlier, but bee emergence hasn't kept pace, creating pollination gaps that threaten food security.",
+                icon: "🐝"
+            },
+            {
+                message: "Cherry trees are blooming in a spectacular display of pink and white, following an ancient rhythm perfected over millions of years.",
+                phenology: "Cherry blossoms in Japan now peak 11 days earlier than in the 1950s - the earliest in 1,200 years of records.",
+                icon: "🌸"
+            },
+            {
+                message: "Today, billions of microscopic phytoplankton in our oceans are producing the oxygen in every other breath you take.",
+                phenology: "Ocean warming is shifting phytoplankton blooms earlier, disrupting marine food webs and changing carbon cycling patterns.",
+                icon: "🌊"
+            },
+            {
+                message: "A hummingbird's heart is beating up to 1,260 times per minute as it hovers at flowers, defying gravity with pure determination.",
+                phenology: "Hummingbirds are arriving at breeding grounds 12 days earlier than in the 1970s, sometimes before their flower food sources bloom.",
+                icon: "🐦"
+            },
+            {
+                message: "Maple trees are tapping into their stored sugars, beginning the sweet flow that will become syrup in a few weeks.",
+                phenology: "Maple syrup season now starts 6-8 days earlier but ends sooner due to warming, reducing overall production time.",
+                icon: "🍁"
+            },
+            {
+                message: "Somewhere, a bird is migrating thousands of miles using magnetic fields and star patterns as ancient as the continents.",
+                phenology: "Bird migration is advancing 2-6 days per decade, but many species aren't keeping up with earlier insect emergence at breeding sites.",
+                icon: "🐦"
+            },
+            {
+                message: "Today, somewhere, a wolf pack is working together to hunt, their ancient cooperation echoing through millennia.",
+                phenology: "Earlier snowmelt in northern regions is changing prey availability, forcing wolves to adapt their hunting patterns and timing.",
+                icon: "🐺"
+            },
+            {
+                message: "A glacier is slowly carving the landscape, shaping valleys and mountains with the patient power of ice and time.",
+                phenology: "Glaciers are melting 2-3 times faster than historical rates, altering river flows and seasonal water availability downstream.",
+                icon: "🏔️"
+            },
+            {
+                message: "Wildflowers are carpeting meadows in brilliant colors, each species timing its bloom to perfection.",
+                phenology: "Alpine wildflowers now bloom 2-3 weeks earlier than in the 1970s, compressing the flowering season and affecting pollinators.",
+                icon: "🌻"
+            },
+            {
+                message: "The moon's gravity is pulling our oceans right now, creating tides that have shaped coastlines for billions of years.",
+                phenology: "Rising seas and changing storm patterns are altering when and how coastal species reproduce and feed with the tides.",
+                icon: "🌙"
+            },
+            {
+                message: "A spider somewhere is spinning silk stronger than steel, creating an architectural marvel with just its body.",
+                phenology: "Warmer temperatures are extending spider activity seasons, but their insect prey emergence times are shifting differently.",
+                icon: "🕷️"
+            },
+            {
+                message: "Today, mycelium networks beneath your feet are connecting forest plants, sharing information and resources you can't see.",
+                phenology: "Fungal networks are becoming active earlier in spring, but this doesn't always match when trees need the most support.",
+                icon: "🍄"
+            },
+            {
+                message: "Somewhere, a whale is singing a song that can travel hundreds of miles through the ocean depths.",
+                phenology: "Whales are arriving at feeding grounds 1-2 weeks earlier as Arctic ice melts sooner, but their food sources may not be ready.",
+                icon: "🐋"
+            },
+            {
+                message: "The sun is fusing 600 million tons of hydrogen into helium every second, powering all life on our planet.",
+                phenology: "While the sun remains constant, earlier springs mean plants start photosynthesis sooner but face more frost risk.",
+                icon: "☀️"
+            },
+            {
+                message: "A robin is singing its morning song, marking territory with melodies that have echoed through countless springs.",
+                phenology: "Robins now arrive 12 days earlier than in the 1960s, but their insect food sources aren't always ready when they arrive.",
+                icon: "🐦"
+            },
+            {
+                message: "Apple trees are beginning to bud, preparing for blossoms that will become this autumn's harvest.",
+                phenology: "Apple trees bloom 4-6 days earlier per decade, but late frosts can still damage blossoms, threatening harvests.",
+                icon: "🍎"
+            },
+            {
+                message: "A mountain stream is carrying minerals from peaks to valleys, slowly but surely shaping the landscape grain by grain.",
+                phenology: "Earlier snowmelt creates spring floods weeks sooner, changing when fish spawn and how valleys flood naturally.",
+                icon: "🏞️"
+            },
+            {
+                message: "Today, coral polyps are building reefs one tiny calcium carbonate skeleton at a time, creating underwater cities.",
+                phenology: "Warmer ocean temperatures are causing corals to spawn at different times, disrupting reproduction and reef recovery.",
+                icon: "🐠"
+            },
+            {
+                message: "The wind is carrying seeds, spores, and stories across continents, connecting distant ecosystems.",
+                phenology: "Earlier pollen release and longer pollen seasons are affecting both plant reproduction and human allergies worldwide.",
+                icon: "💨"
+            },
+            {
+                message: "A salamander is regenerating a lost limb, performing biological magic that scientists are still trying to understand.",
+                phenology: "Amphibians are breeding 2-3 weeks earlier, but their pond habitats are drying up sooner, threatening tadpole survival.",
+                icon: "🦎"
+            },
+            {
+                message: "Today, somewhere, ancient trees are adding another ring to their trunks, recording this year in their living memory.",
+                phenology: "Tree rings show growing seasons now start earlier and last longer, but drought stress is also increasing in many regions.",
+                icon: "🌲"
+            },
+            {
+                message: "Fireflies are preparing for tonight's light show, each species flashing its unique code in the gathering dusk.",
+                phenology: "Fireflies now emerge 1-2 weeks earlier than decades past, but their light patterns may be disrupted by warmer nights.",
+                icon: "✨"
+            },
+            {
+                message: "A beaver dam is creating wetland habitat, engineering an ecosystem that supports dozens of other species.",
+                phenology: "Earlier ice-out on beaver ponds changes when amphibians breed and when waterfowl nest, affecting wetland communities.",
+                icon: "🦫"
+            },
+            {
+                message: "The Earth's magnetic field is silently protecting us from solar radiation, wrapping our planet in an invisible shield.",
+                phenology: "While magnetic fields stay constant, changing weather patterns are affecting when animals use magnetic navigation for migration.",
+                icon: "🌍"
+            },
+            {
+                message: "Today, lichens are slowly breaking down rocks into soil, performing the patient alchemy that makes gardens possible.",
+                phenology: "Warmer temperatures are speeding lichen growth, but also making them more vulnerable to heat stress and drought.",
+                icon: "🪨"
+            },
+            {
+                message: "A hawk is riding thermals high above, using the Earth's heated air currents to soar effortlessly for miles.",
+                phenology: "Earlier spring warming creates thermal currents sooner, helping raptors migrate earlier but changing prey availability timing.",
+                icon: "🦅"
+            }
+        ];
+
+        function formatDate() {
+            const today = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            return today.toLocaleDateString('en-US', options);
+        }
+
+        function getDailyMessage() {
+            // Use the date as a seed for consistent daily message
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+            const messageIndex = dayOfYear % natureMessages.length;
+            return natureMessages[messageIndex];
+        }
+
+        function generateNewMessage() {
+            const randomMessage = natureMessages[Math.floor(Math.random() * natureMessages.length)];
+            document.getElementById('dailyMessage').textContent = randomMessage.message;
+            document.getElementById('natureIcon').textContent = randomMessage.icon;
+            document.getElementById('phenologyInfo').innerHTML = 
+                `<span class="phenology-label">Climate Impact</span>${randomMessage.phenology}`;
+        }
+
+        function initializeApp() {
+            document.getElementById('currentDate').textContent = formatDate();
+            const dailyMessage = getDailyMessage();
+            document.getElementById('dailyMessage').textContent = dailyMessage.message;
+            document.getElementById('natureIcon').textContent = dailyMessage.icon;
+            document.getElementById('phenologyInfo').innerHTML = 
+                `<span class="phenology-label">Climate Impact</span>${dailyMessage.phenology}`;
+        }
+
+        // Initialize the app when the page loads
+        initializeApp();
+
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('sw.js')
+                    .then(function(registration) {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(function(err) {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
