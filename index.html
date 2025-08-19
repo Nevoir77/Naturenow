@@ -28,7 +28,7 @@
 
         body {
             font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #f8f9fa;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -58,6 +58,8 @@
             color: #666;
             margin-bottom: 30px;
             font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .message {
@@ -112,21 +114,12 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+            
         @media (max-width: 480px) {
             .container {
                 padding: 30px 20px;
@@ -136,23 +129,18 @@
             .message {
                 font-size: 20px;
             }
-            
-            .nature-icon {
-                font-size: 50px;
-            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="date" id="currentDate"></div>
-        <div class="nature-icon" id="natureIcon">🌿</div>
         <div class="message" id="dailyMessage">Loading your daily nature message...</div>
         <div class="phenology-info" id="phenologyInfo">
             <span class="phenology-label">Climate Impact</span>
             Loading phenology information...
         </div>
-        <button class="refresh-btn" onclick="generateNewMessage()">New Message</button>
+        <button class="refresh-btn" onclick="showYesterday()">Yesterday</button>
     </div>
 
     <script>
@@ -309,38 +297,46 @@
             }
         ];
 
-        function formatDate() {
-            const today = new Date();
-            const options = { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
+        function formatDate(date = new Date()) {
+            const day = date.getDate();
+            const month = date.toLocaleDateString('en-US', { month: 'long' });
+            
+            // Add ordinal suffix (st, nd, rd, th)
+            const getOrdinalSuffix = (day) => {
+                if (day > 3 && day < 21) return 'th';
+                switch (day % 10) {
+                    case 1: return 'st';
+                    case 2: return 'nd';
+                    case 3: return 'rd';
+                    default: return 'th';
+                }
             };
-            return today.toLocaleDateString('en-US', options);
+            
+            return `${day}${getOrdinalSuffix(day)} ${month}`;
         }
 
-        function getDailyMessage() {
+        function getDailyMessage(date = new Date()) {
             // Use the date as a seed for consistent daily message
-            const today = new Date();
-            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+            const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
             const messageIndex = dayOfYear % natureMessages.length;
             return natureMessages[messageIndex];
         }
 
-        function generateNewMessage() {
-            const randomMessage = natureMessages[Math.floor(Math.random() * natureMessages.length)];
-            document.getElementById('dailyMessage').textContent = randomMessage.message;
-            document.getElementById('natureIcon').textContent = randomMessage.icon;
+        function showYesterday() {
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            
+            document.getElementById('currentDate').textContent = formatDate(yesterday);
+            const yesterdayMessage = getDailyMessage(yesterday);
+            document.getElementById('dailyMessage').textContent = yesterdayMessage.message;
             document.getElementById('phenologyInfo').innerHTML = 
-                `<span class="phenology-label">Climate Impact</span>${randomMessage.phenology}`;
+                `<span class="phenology-label">Climate Impact</span>${yesterdayMessage.phenology}`;
         }
 
         function initializeApp() {
             document.getElementById('currentDate').textContent = formatDate();
             const dailyMessage = getDailyMessage();
             document.getElementById('dailyMessage').textContent = dailyMessage.message;
-            document.getElementById('natureIcon').textContent = dailyMessage.icon;
             document.getElementById('phenologyInfo').innerHTML = 
                 `<span class="phenology-label">Climate Impact</span>${dailyMessage.phenology}`;
         }
