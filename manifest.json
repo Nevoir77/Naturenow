@@ -1,8 +1,8 @@
 {
   "name": "Daily Nature Messages",
-  "short_name": "Nature Daily",
+  "short_name": "Naturenow",
   "description": "Daily messages about the natural world and climate change impacts",
-  "start_url": "/",
+  "start_url": "/Naturenow/",
   "display": "standalone",
   "background_color": "#667eea",
   "theme_color": "#667eea",
