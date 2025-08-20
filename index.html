@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naturenow</title>
+    <title>Daily Nature Message</title>
     
     <!-- PWA Meta Tags -->
     <meta name="description" content="Daily messages about the natural world and climate change impacts">
@@ -17,8 +17,7 @@
     <link rel="icon" type="image/png" sizes="512x512" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23667eea'/><text x='50%' y='50%' text-anchor='middle' dy='0.3em' font-size='40'>🌿</text></svg>">
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23667eea'/><text x='50%' y='50%' text-anchor='middle' dy='0.3em' font-size='40'>🌿</text></svg>">
     
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="manifest.json">
+
     <style>
         * {
             margin: 0;
@@ -56,13 +55,14 @@
             transform: translateY(-5px);
         }
 
-        .swipe-hint {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 12px;
-            color: #999;
-            opacity: 0.7;
+        .nature-illustration {
+            width: 200px;
+            height: 150px;
+            margin: 0 auto 20px;
+            border-radius: 15px;
+            object-fit: cover;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in;
         }
 
         .learn-more {
@@ -127,29 +127,60 @@
             animation: pulse 2s infinite;
         }
 
-        .refresh-btn {
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            gap: 20px;
+        }
+
+        .nav-btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 12px 30px;
+            padding: 12px 24px;
             border-radius: 25px;
             font-size: 16px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: inherit;
+            min-width: 100px;
         }
 
-        .refresh-btn:hover {
+        .nav-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
-        @media (max-width: 480px) {
-            .container {
-                padding: 30px 20px;
-                margin: 10px;
-            }
-            
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .page-indicator {
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
         @media (max-width: 480px) {
             .container {
                 padding: 30px 20px;
@@ -159,17 +190,38 @@
             .message {
                 font-size: 20px;
             }
+
+            .nature-illustration {
+                width: 150px;
+                height: 112px;
+            }
+
+            .navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-btn {
+                width: 100%;
+                max-width: 200px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container" id="mainContainer">
-        <div class="swipe-hint">Swipe ← →</div>
         <div class="date" id="currentDate"></div>
+        <img class="nature-illustration" id="natureImage" src="" alt="Nature illustration" />
         <div class="message" id="dailyMessage">Loading your daily nature message...</div>
         <div class="phenology-info" id="phenologyInfo">
             <span class="phenology-label">Impacts of a changing climate</span>
             Loading phenology information...
+        </div>
+        
+        <div class="navigation">
+            <button class="nav-btn" id="prevBtn" onclick="previousMessage()">← Prev</button>
+            <div class="page-indicator" id="pageIndicator">1 / 10</div>
+            <button class="nav-btn" id="nextBtn" onclick="nextMessage()">Next →</button>
         </div>
     </div>
 
@@ -180,6 +232,7 @@
                 message: "Female cuckoos are arriving",
                 phenology: "Cuckoos now arrive 5-7 days earlier than in the 1960s, but their host species' breeding timing hasn't shifted equally.",
                 icon: "🐦",
+                image: "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=400&h=300&fit=crop&crop=center",
                 link: "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/cuckoo/",
                 linkText: "cuckoos"
             },
@@ -188,6 +241,7 @@
                 message: "The first nightjars arrive, churring and wing clapping at dusk",
                 phenology: "Nightjars arrive 8-10 days earlier than historical records, but their insect prey peaks haven't shifted as much.",
                 icon: "🌙",
+                image: "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=400&h=300&fit=crop&crop=center",
                 link: "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/nightjar/",
                 linkText: "nightjars"
             },
@@ -196,6 +250,7 @@
                 message: "Wild bluebells are in full flower in the woods",
                 phenology: "Bluebells now flower 2-3 weeks earlier than in the 1950s, shortening their blooming period and affecting woodland ecology.",
                 icon: "🌸",
+                image: "https://images.unsplash.com/photo-1555400569-4e5c0817da7c?w=400&h=300&fit=crop&crop=center",
                 link: "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/plants/wild-flowers/bluebell/",
                 linkText: "bluebells"
             },
@@ -204,6 +259,7 @@
                 message: "Young tawny owls may be calling now, before they have broken out of their egg",
                 phenology: "Tawny owl breeding is advancing by 4-5 days per decade, but their rodent prey availability timing is shifting differently.",
                 icon: "🦉",
+                image: "https://images.unsplash.com/photo-1568641280671-8c3f89082736?w=400&h=300&fit=crop&crop=center",
                 link: "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/tawny-owl/",
                 linkText: "tawny owls"
             },
@@ -212,6 +268,7 @@
                 message: "The first young grebes have hatched and are carried on the backs of their parents",
                 phenology: "Great crested grebes breed 6-8 days earlier than in the 1970s, but warmer waters affect their fish food availability.",
                 icon: "🐣",
+                image: "https://images.unsplash.com/photo-1571985120382-bf4d84dce8a4?w=400&h=300&fit=crop&crop=center",
                 link: "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/great-crested-grebe/",
                 linkText: "grebes"
             },
@@ -220,6 +277,7 @@
                 message: "Spotted flycatchers are arriving from Africa",
                 phenology: "Spotted flycatchers arrive 3-4 days earlier than in the 1960s, but their aerial insect prey peaks are shifting unpredictably.",
                 icon: "🐦",
+                image: "https://images.unsplash.com/photo-1453872302360-eed3c5f8ff66?w=400&h=300&fit=crop&crop=center",
                 link: "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/spotted-flycatcher/",
                 linkText: "Spotted flycatchers"
             },
@@ -228,6 +286,7 @@
                 message: "The rare golden orieole's fluting sound may be heard",
                 phenology: "Golden orioles arrive 7-9 days earlier than historical records, but habitat loss compounds timing disruption challenges.",
                 icon: "🎵",
+                image: "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=400&h=300&fit=crop&crop=center",
                 link: "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/golden-oriole/",
                 linkText: "golden orieole"
             },
@@ -236,22 +295,25 @@
                 message: "Oaks are in flower, producing a lot of pollen",
                 phenology: "Oak flowering advances 2-3 days per decade, extending pollen seasons and affecting both wildlife and human allergies.",
                 icon: "🌳",
+                image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop&crop=center",
                 link: "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/british-trees/a-z-of-british-trees/english-oak/",
                 linkText: "Oaks"
             },
             {
                 date: "9th May",
-                message: "Holly blue butterfiles are on the wing",
+                message: "Holly blue butterflies are on the wing",
                 phenology: "Holly blues emerge 8-12 days earlier than in the 1980s, risking mismatch with their host plants' optimal timing.",
                 icon: "🦋",
+                image: "https://images.unsplash.com/photo-1517263904808-5dc91e3e7044?w=400&h=300&fit=crop&crop=center",
                 link: "https://butterfly-conservation.org/butterflies/holly-blue",
-                linkText: "Holly blue butterfiles"
+                linkText: "Holly blue butterflies"
             },
             {
                 date: "10th May",
-                message: "The last of the summer migrants have arrived : swifts are screaming across the sky",
+                message: "The last of the summer migrants have arrived: swifts are screaming across the sky",
                 phenology: "Swifts arrive 4-6 days earlier than in the 1960s, but their aerial insect food may not be at peak abundance yet.",
                 icon: "🐦",
+                image: "https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=300&fit=crop&crop=center",
                 link: "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/swift/",
                 linkText: "swifts"
             }
@@ -287,6 +349,11 @@
             const message = natureMessages[index];
             document.getElementById('currentDate').textContent = message.date;
             
+            // Update image
+            const imageElement = document.getElementById('natureImage');
+            imageElement.src = message.image;
+            imageElement.alt = `Illustration of ${message.linkText}`;
+            
             // Create message with linked text
             const messageElement = document.getElementById('dailyMessage');
             const messageText = message.message;
@@ -304,16 +371,27 @@
             
             document.getElementById('phenologyInfo').innerHTML = 
                 `<span class="phenology-label">Impacts of a changing climate</span>${message.phenology}`;
+            
+            // Update page indicator
+            document.getElementById('pageIndicator').textContent = `${index + 1} / ${natureMessages.length}`;
+            
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = index === 0;
+            document.getElementById('nextBtn').disabled = index === natureMessages.length - 1;
         }
 
         function nextMessage() {
-            currentMessageIndex = (currentMessageIndex + 1) % natureMessages.length;
-            showMessage(currentMessageIndex);
+            if (currentMessageIndex < natureMessages.length - 1) {
+                currentMessageIndex++;
+                showMessage(currentMessageIndex);
+            }
         }
 
         function previousMessage() {
-            currentMessageIndex = (currentMessageIndex - 1 + natureMessages.length) % natureMessages.length;
-            showMessage(currentMessageIndex);
+            if (currentMessageIndex > 0) {
+                currentMessageIndex--;
+                showMessage(currentMessageIndex);
+            }
         }
 
         // Touch/Swipe functionality
@@ -371,19 +449,6 @@
 
         // Initialize the app when the page loads
         initializeApp();
-
-        // Register Service Worker for PWA
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('sw.js')
-                    .then(function(registration) {
-                        console.log('ServiceWorker registration successful');
-                    })
-                    .catch(function(err) {
-                        console.log('ServiceWorker registration failed: ', err);
-                    });
-            });
-        }
     </script>
 </body>
 </html>
