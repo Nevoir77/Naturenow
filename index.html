@@ -26,7 +26,7 @@
 
         body {
             font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #4a7c59 0%, #2d5a3d 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -96,7 +96,6 @@
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 30px;
-            border-left: 4px solid #3498db;
             animation: slideIn 1s ease-in 0.3s both;
         }
 
@@ -201,8 +200,8 @@
         </div>
         
         <div class="navigation">
-            <button class="nav-btn" id="prevBtn" onclick="previousMessage()">← Jan 1</button>
-            <button class="nav-btn" id="nextBtn" onclick="nextMessage()">Jan 3 →</button>
+            <button class="nav-btn" id="prevBtn" onclick="previousMessage()">< Prev</button>
+            <button class="nav-btn" id="nextBtn" onclick="nextMessage()">Next ></button>
         </div>
     </div>
 
@@ -211,7 +210,7 @@
             // JANUARY
             { date: "1st January", message: "Redwings and fieldfares are feeding in flocks on fallen apples and berries", phenology: "These winter visitors from Scandinavia now arrive 2-3 weeks later than in the 1960s as northern winters become milder, delaying their need to migrate south.", linkText: "winter thrushes" },
             { date: "2nd January", message: "Grey seals are pupping on remote beaches around Britain", phenology: "Seal pupping seasons have extended by 3-4 weeks due to warmer seas, but storms intensified by climate change threaten vulnerable pups.", linkText: "grey seals" },
-            { date: "3rd January", message: "Snowdrops are pushing through the frozen earth in sheltered woodlands", phenology: "Snowdrops now flower 18-25 days earlier than in Victorian records, often finishing before traditional 'snowdrop season' begins.", linkText: "snowdrops" },
+            { date: "3rd January", message: "Snowdrops are pushing through the frozen earth in sheltered woodlands", phenology: "Snowdrops now flower 18-25 days earlier than in Victorian records, often finishing before traditional snowdrop season begins.", linkText: "snowdrops" },
             { date: "4th January", message: "Peregrine falcons are beginning their spectacular courtship flights over city cliffs", phenology: "Urban peregrines breed 5-7 days earlier than cliff-nesting pairs, with city heat islands affecting their breeding cycle.", linkText: "peregrines" },
             { date: "5th January", message: "Winter moths emerge on mild nights, vital food for roosting birds", phenology: "Winter moth emergence is becoming more unpredictable, with warm spells followed by cold snaps disrupting their lifecycle and bird food supplies.", linkText: "winter moths" },
             { date: "6th January", message: "The first hazel catkins are releasing clouds of golden pollen", phenology: "Hazel flowering has advanced by 3 weeks since 1950, extending hay fever seasons and sometimes occurring before female flowers are ready.", linkText: "hazel catkins" },
@@ -220,7 +219,7 @@
             { date: "9th January", message: "Common frogs are stirring in pond mud, soon to begin their migration", phenology: "Frog spawning now occurs 2-3 weeks earlier on average, but unpredictable warm spells followed by frosts can kill early spawn.", linkText: "frogs" },
             { date: "10th January", message: "Yellowhammers flock to stubble fields, their golden heads bright against winter browns", phenology: "Yellowhammers suffer as winter stubble fields disappear due to changing farming practices driven by economic and climate pressures.", linkText: "yellowhammers" },
             { date: "11th January", message: "Barn owls are hunting over frosted grasslands, their white forms ghostly in moonlight", phenology: "Barn owls breed more frequently in warm years but struggle when climate extremes reduce small mammal populations.", linkText: "barn owls" },
-            { date: "12th January", message: "Alder trees dangle their purple catkins like tiny lanterns", phenology: "Alder catkins now open 2-3 weeks earlier than historical records, sometimes before pollinators are active.", linkText: "alders" },
+            { date: "12th January", message: "Alder trees dangle their purple catkins like tiny lanterns", phenology: "Alder catkins now open 2-3 weeks earlier than historical records, sometimes before pollinators are active.", linkText: "alder trees" },
             { date: "13th January", message: "Waxwings may appear suddenly, their silk-soft calls announcing an irruption from the north", phenology: "Waxwing irruptions are becoming less predictable as northern berry crops fail more frequently due to weather extremes.", linkText: "waxwings" },
             { date: "14th January", message: "The first bees emerge on warm winter days, searching for early nectar", phenology: "Bees are emerging 2-4 weeks earlier but finding fewer winter flowers, creating a critical early-season nectar gap.", linkText: "winter bees" },
             { date: "15th January", message: "Red deer stags are shedding their antlers after the autumn rut", phenology: "Deer rutting seasons have extended due to milder autumns, with stags retaining antlers longer and breeding patterns shifting.", linkText: "red deer" },
@@ -447,6 +446,7 @@
             // Plants
             'snowdrops': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/snowdrop',
             'hazel catkins': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/hazel',
+            'alder trees': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/alder',
             'alders': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/alder',
             'winter heliotrope': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/winter-heliotrope',
             'lesser celandines': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/lesser-celandine',
@@ -517,14 +517,13 @@
             const linkedMessage = createLinkedMessage(message.message);
             messageElement.innerHTML = linkedMessage;
             
-            // Also link species in phenology information
-            const phenologyLinked = createLinkedMessage(message.phenology);
+            // Show phenology information WITHOUT links
             document.getElementById('phenologyInfo').innerHTML = 
-                `<span class="phenology-label">Impacts of a warming climate</span>${phenologyLinked}`;
+                `<span class="phenology-label">Impacts of a warming climate</span>${message.phenology}`;
             
             // Update navigation buttons with dates
-            document.getElementById('prevBtn').textContent = `← ${dates.prev}`;
-            document.getElementById('nextBtn').textContent = `${dates.next} →`;
+            document.getElementById('prevBtn').textContent = `< Prev`;
+            document.getElementById('nextBtn').textContent = `Next >`;
             
             document.getElementById('prevBtn').disabled = false;
             document.getElementById('nextBtn').disabled = false;
