@@ -356,29 +356,171 @@
             };
         }
 
+        // Species linking configuration
+        const speciesLinks = {
+            // Birds
+            'redwings': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/redwing/',
+            'fieldfares': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/fieldfare/',
+            'winter thrushes': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/redwing/',
+            'grey seals': 'https://www.wildlifetrusts.org/wildlife-explorer/marine/seals/grey-seal',
+            'peregrine falcons': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/peregrine/',
+            'peregrines': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/peregrine/',
+            'robins': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/robin/',
+            'starling murmurations': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/starling/',
+            'starlings': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/starling/',
+            'yellowhammers': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/yellowhammer/',
+            'barn owls': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/barn-owl/',
+            'waxwings': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/waxwing/',
+            'cormorants': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/cormorant/',
+            'great spotted woodpeckers': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/great-spotted-woodpecker/',
+            'woodpeckers': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/great-spotted-woodpecker/',
+            'turnstones': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/turnstone/',
+            'lapwings': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/lapwing/',
+            'blackbirds': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/blackbird/',
+            'long-tailed tits': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/long-tailed-tit/',
+            'curlews': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/curlew/',
+            'song thrushes': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/song-thrush/',
+            'rooks': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/rook/',
+            'great tits': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/great-tit/',
+            'skylarks': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/skylark/',
+            'mistle thrushes': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/mistle-thrush/',
+            'grey herons': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/grey-heron/',
+            'herons': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/grey-heron/',
+            'blue tits': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/blue-tit/',
+            'chaffinches': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/chaffinch/',
+            'jackdaws': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/jackdaw/',
+            'buzzards': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/buzzard/',
+            'wood pigeons': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/woodpigeon/',
+            'dunnocks': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/dunnock/',
+            'wrens': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/wren/',
+            'goldfinches': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/goldfinch/',
+            'sand martins': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/sand-martin/',
+            'chiffchaffs': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/chiffchaff/',
+            'wheatears': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/wheatear/',
+            'stone curlews': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/stone-curlew/',
+            'house martins': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/house-martin/',
+            'greenfinches': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/greenfinch/',
+            'swallows': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/swallow/',
+            'linnets': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/linnet/',
+            'willow warblers': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/willow-warbler/',
+            'redstarts': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/redstart/',
+            'yellow wagtails': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/yellow-wagtail/',
+            'cuckoos': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/cuckoo/',
+            'garden warblers': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/garden-warbler/',
+            'whitethroats': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/whitethroat/',
+            'sedge warblers': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/sedge-warbler/',
+            'reed warblers': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/reed-warbler/',
+            'tree sparrows': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/tree-sparrow/',
+            'blackcaps': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/blackcap/',
+            'pied flycatchers': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/pied-flycatcher/',
+            'turtle doves': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/turtle-dove/',
+            'wood warblers': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/wood-warbler/',
+            'tree pipits': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/tree-pipit/',
+            'grasshopper warblers': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/grasshopper-warbler/',
+            'nightingales': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/nightingale/',
+            
+            // Mammals
+            'red deer': 'https://www.wildlifetrusts.org/wildlife-explorer/mammals/deer/red-deer',
+            'foxes': 'https://www.wildlifetrusts.org/wildlife-explorer/mammals/dogs-foxes-and-wolves/red-fox',
+            'red squirrels': 'https://www.wildlifetrusts.org/wildlife-explorer/mammals/squirrels/red-squirrel',
+            'badgers': 'https://www.wildlifetrusts.org/wildlife-explorer/mammals/badger',
+            
+            // Amphibians & Reptiles
+            'common frogs': 'https://www.wildlifetrusts.org/wildlife-explorer/amphibians/frogs-and-toads/common-frog',
+            'frogs': 'https://www.wildlifetrusts.org/wildlife-explorer/amphibians/frogs-and-toads/common-frog',
+            'frog spawn': 'https://www.wildlifetrusts.org/wildlife-explorer/amphibians/frogs-and-toads/common-frog',
+            'common toads': 'https://www.wildlifetrusts.org/wildlife-explorer/amphibians/frogs-and-toads/common-toad',
+            'sand lizards': 'https://www.wildlifetrusts.org/wildlife-explorer/reptiles/lizards/sand-lizard',
+            'common lizards': 'https://www.wildlifetrusts.org/wildlife-explorer/reptiles/lizards/common-lizard',
+            
+            // Invertebrates
+            'winter moths': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/winter-moth',
+            'winter bees': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/bees-wasps-and-ants/honey-bee',
+            'brimstone butterflies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/brimstone',
+            'peacock butterflies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/peacock',
+            'small tortoiseshell butterflies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/small-tortoiseshell',
+            'orange tip butterflies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/orange-tip',
+            'comma butterflies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/comma',
+            'holly blue butterflies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/holly-blue',
+            'amphipods': 'https://www.marinebio.org/species/amphipods/amphipoda-sp/',
+            
+            // Plants
+            'snowdrops': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/snowdrop',
+            'hazel catkins': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/hazel',
+            'alders': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/alder',
+            'winter heliotrope': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/winter-heliotrope',
+            'lesser celandines': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/lesser-celandine',
+            'winter jasmine': 'https://www.rhs.org.uk/plants/9547/jasminum-nudiflorum/details',
+            'primroses': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/primrose',
+            'gorse': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/gorse',
+            'pussy willow': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/goat-willow',
+            'willows': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/goat-willow',
+            'daffodils': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/wild-daffodil',
+            'wild daffodils': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/wild-daffodil',
+            'crocuses': 'https://www.rhs.org.uk/plants/crocus/growing-guide',
+            'dog\'s mercury': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/dogs-mercury',
+            'wild garlic': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/ramsons',
+            'coltsfoot': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/coltsfoot',
+            'wood anemones': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/wood-anemone',
+            'blackthorn': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/blackthorn',
+            'cuckoo flowers': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/cuckooflower',
+            'violets': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/common-dog-violet',
+            'dandelions': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/dandelion',
+            'greater stitchwort': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/greater-stitchwort',
+            'grape hyacinths': 'https://www.rhs.org.uk/plants/muscari/growing-guide',
+            'cowslips': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/cowslip',
+            'ash trees': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/ash',
+            'bluebells': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/bluebell',
+            'sweet woodruff': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/sweet-woodruff',
+            'hawthorn': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/hawthorn',
+            'wild strawberry': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/wild-strawberry',
+            'garlic mustard': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/garlic-mustard',
+            'marsh marigolds': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/marsh-marigold',
+            'ground ivy': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/ground-ivy',
+            'wood sorrel': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/wood-sorrel',
+            'rowan trees': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/rowan',
+            'red campion': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/red-campion',
+            'herb robert': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/herb-robert',
+            'forget-me-nots': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/water-forget-me-not',
+            'wild cherry': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/wild-cherry',
+            'oak trees': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/english-oak',
+            'adder\'s-tongue ferns': 'https://www.wildlifetrusts.org/wildlife-explorer/ferns/adders-tongue-fern',
+            'green-winged orchids': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/green-winged-orchid'
+        };
+
+        function createLinkedMessage(message) {
+            let linkedMessage = message;
+            
+            // Sort species by length (longest first) to avoid partial replacements
+            const sortedSpecies = Object.keys(speciesLinks).sort((a, b) => b.length - a.length);
+            
+            sortedSpecies.forEach(species => {
+                const regex = new RegExp(`\\b${species}\\b`, 'gi');
+                if (regex.test(linkedMessage)) {
+                    linkedMessage = linkedMessage.replace(regex, 
+                        `<a href="${speciesLinks[species]}" target="_blank" rel="noopener noreferrer" style="color: #2980b9; font-weight: 500; text-decoration: underline;">${species}</a>`
+                    );
+                }
+            });
+            
+            return linkedMessage;
+        }
+
         function showMessage(index) {
             const message = natureMessages[index];
             const dates = getPrevNextDates(index);
             
             document.getElementById('currentDate').textContent = message.date;
             
-            // Create message with linked text
+            // Create message with species links
             const messageElement = document.getElementById('dailyMessage');
-            const messageText = message.message;
-            const linkText = message.linkText;
+            const linkedMessage = createLinkedMessage(message.message);
+            messageElement.innerHTML = linkedMessage;
             
-            if (linkText && messageText.includes(linkText)) {
-                const linkedMessage = messageText.replace(
-                    linkText, 
-                    `<span style="color: #2980b9; font-weight: 500;">${linkText}</span>`
-                );
-                messageElement.innerHTML = linkedMessage;
-            } else {
-                messageElement.textContent = messageText;
-            }
-            
+            // Also link species in phenology information
+            const phenologyLinked = createLinkedMessage(message.phenology);
             document.getElementById('phenologyInfo').innerHTML = 
-                `<span class="phenology-label">Impacts of a warming climate</span>${message.phenology}`;
+                `<span class="phenology-label">Impacts of a warming climate</span>${phenologyLinked}`;
             
             // Update navigation buttons with dates
             document.getElementById('prevBtn').textContent = `← ${dates.prev}`;
