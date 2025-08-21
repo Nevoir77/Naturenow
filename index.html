@@ -17,7 +17,6 @@
     <link rel="icon" type="image/png" sizes="512x512" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23667eea'/><text x='50%' y='50%' text-anchor='middle' dy='0.3em' font-size='40'>🌿</text></svg>">
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23667eea'/><text x='50%' y='50%' text-anchor='middle' dy='0.3em' font-size='40'>🌿</text></svg>">
     
-
     <style>
         * {
             margin: 0;
@@ -27,7 +26,7 @@
 
         body {
             font-family: 'Georgia', serif;
-            background: #f8f9fa;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -53,16 +52,6 @@
 
         .container:hover {
             transform: translateY(-5px);
-        }
-
-        .nature-illustration {
-            width: 200px;
-            height: 150px;
-            margin: 0 auto 20px;
-            border-radius: 15px;
-            object-fit: cover;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 1s ease-in;
         }
 
         .learn-more {
@@ -132,20 +121,24 @@
             justify-content: space-between;
             align-items: center;
             margin-top: 20px;
-            gap: 20px;
+            gap: 15px;
         }
 
         .nav-btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-size: 16px;
+            padding: 8px 12px;
+            border-radius: 15px;
+            font-size: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: inherit;
-            min-width: 100px;
+            min-width: 60px;
+            max-width: 120px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .nav-btn:hover {
@@ -158,12 +151,6 @@
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
-        }
-
-        .page-indicator {
-            color: #666;
-            font-size: 14px;
-            font-weight: 500;
         }
 
         @keyframes fadeIn {
@@ -191,19 +178,15 @@
                 font-size: 20px;
             }
 
-            .nature-illustration {
-                width: 150px;
-                height: 112px;
-            }
-
             .navigation {
-                flex-direction: column;
-                gap: 15px;
+                gap: 10px;
             }
 
             .nav-btn {
-                width: 100%;
-                max-width: 200px;
+                padding: 6px 10px;
+                font-size: 10px;
+                min-width: 50px;
+                max-width: 100px;
             }
         }
     </style>
@@ -211,148 +194,173 @@
 <body>
     <div class="container" id="mainContainer">
         <div class="date" id="currentDate"></div>
-        <img class="nature-illustration" id="natureImage" src="" alt="Nature illustration" />
         <div class="message" id="dailyMessage">Loading your daily nature message...</div>
         <div class="phenology-info" id="phenologyInfo">
-            <span class="phenology-label">Impacts of a changing climate</span>
+            <span class="phenology-label">Impacts of a warming climate</span>
             Loading phenology information...
         </div>
         
         <div class="navigation">
-            <button class="nav-btn" id="prevBtn" onclick="previousMessage()">← Prev</button>
-            <div class="page-indicator" id="pageIndicator">1 / 10</div>
-            <button class="nav-btn" id="nextBtn" onclick="nextMessage()">Next →</button>
+            <button class="nav-btn" id="prevBtn" onclick="previousMessage()">← Jan 1</button>
+            <button class="nav-btn" id="nextBtn" onclick="nextMessage()">Jan 3 →</button>
         </div>
     </div>
 
     <script>
         const natureMessages = [
-            {
-                date: "1st May",
-                message: "Female cuckoos are arriving",
-                phenology: "Cuckoos now arrive 5-7 days earlier than in the 1960s, but their host species' breeding timing hasn't shifted equally.",
-                icon: "🐦",
-                image: "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=400&h=300&fit=crop&crop=center",
-                link: "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/cuckoo/",
-                linkText: "cuckoos"
-            },
-            {
-                date: "2nd May",
-                message: "The first nightjars arrive, churring and wing clapping at dusk",
-                phenology: "Nightjars arrive 8-10 days earlier than historical records, but their insect prey peaks haven't shifted as much.",
-                icon: "🌙",
-                image: "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=400&h=300&fit=crop&crop=center",
-                link: "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/nightjar/",
-                linkText: "nightjars"
-            },
-            {
-                date: "3rd May",
-                message: "Wild bluebells are in full flower in the woods",
-                phenology: "Bluebells now flower 2-3 weeks earlier than in the 1950s, shortening their blooming period and affecting woodland ecology.",
-                icon: "🌸",
-                image: "https://images.unsplash.com/photo-1555400569-4e5c0817da7c?w=400&h=300&fit=crop&crop=center",
-                link: "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/plants/wild-flowers/bluebell/",
-                linkText: "bluebells"
-            },
-            {
-                date: "4th May",
-                message: "Young tawny owls may be calling now, before they have broken out of their egg",
-                phenology: "Tawny owl breeding is advancing by 4-5 days per decade, but their rodent prey availability timing is shifting differently.",
-                icon: "🦉",
-                image: "https://images.unsplash.com/photo-1568641280671-8c3f89082736?w=400&h=300&fit=crop&crop=center",
-                link: "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/tawny-owl/",
-                linkText: "tawny owls"
-            },
-            {
-                date: "5th May",
-                message: "The first young grebes have hatched and are carried on the backs of their parents",
-                phenology: "Great crested grebes breed 6-8 days earlier than in the 1970s, but warmer waters affect their fish food availability.",
-                icon: "🐣",
-                image: "https://images.unsplash.com/photo-1571985120382-bf4d84dce8a4?w=400&h=300&fit=crop&crop=center",
-                link: "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/great-crested-grebe/",
-                linkText: "grebes"
-            },
-            {
-                date: "6th May",
-                message: "Spotted flycatchers are arriving from Africa",
-                phenology: "Spotted flycatchers arrive 3-4 days earlier than in the 1960s, but their aerial insect prey peaks are shifting unpredictably.",
-                icon: "🐦",
-                image: "https://images.unsplash.com/photo-1453872302360-eed3c5f8ff66?w=400&h=300&fit=crop&crop=center",
-                link: "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/spotted-flycatcher/",
-                linkText: "Spotted flycatchers"
-            },
-            {
-                date: "7th May",
-                message: "The rare golden orieole's fluting sound may be heard",
-                phenology: "Golden orioles arrive 7-9 days earlier than historical records, but habitat loss compounds timing disruption challenges.",
-                icon: "🎵",
-                image: "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=400&h=300&fit=crop&crop=center",
-                link: "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/golden-oriole/",
-                linkText: "golden orieole"
-            },
-            {
-                date: "8th May",
-                message: "Oaks are in flower, producing a lot of pollen",
-                phenology: "Oak flowering advances 2-3 days per decade, extending pollen seasons and affecting both wildlife and human allergies.",
-                icon: "🌳",
-                image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop&crop=center",
-                link: "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/british-trees/a-z-of-british-trees/english-oak/",
-                linkText: "Oaks"
-            },
-            {
-                date: "9th May",
-                message: "Holly blue butterflies are on the wing",
-                phenology: "Holly blues emerge 8-12 days earlier than in the 1980s, risking mismatch with their host plants' optimal timing.",
-                icon: "🦋",
-                image: "https://images.unsplash.com/photo-1517263904808-5dc91e3e7044?w=400&h=300&fit=crop&crop=center",
-                link: "https://butterfly-conservation.org/butterflies/holly-blue",
-                linkText: "Holly blue butterflies"
-            },
-            {
-                date: "10th May",
-                message: "The last of the summer migrants have arrived: swifts are screaming across the sky",
-                phenology: "Swifts arrive 4-6 days earlier than in the 1960s, but their aerial insect food may not be at peak abundance yet.",
-                icon: "🐦",
-                image: "https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=300&fit=crop&crop=center",
-                link: "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/swift/",
-                linkText: "swifts"
-            }
+            // JANUARY
+            { date: "1st January", message: "Redwings and fieldfares are feeding in flocks on fallen apples and berries", phenology: "These winter visitors from Scandinavia now arrive 2-3 weeks later than in the 1960s as northern winters become milder, delaying their need to migrate south.", linkText: "winter thrushes" },
+            { date: "2nd January", message: "Grey seals are pupping on remote beaches around Britain", phenology: "Seal pupping seasons have extended by 3-4 weeks due to warmer seas, but storms intensified by climate change threaten vulnerable pups.", linkText: "grey seals" },
+            { date: "3rd January", message: "Snowdrops are pushing through the frozen earth in sheltered woodlands", phenology: "Snowdrops now flower 18-25 days earlier than in Victorian records, often finishing before traditional 'snowdrop season' begins.", linkText: "snowdrops" },
+            { date: "4th January", message: "Peregrine falcons are beginning their spectacular courtship flights over city cliffs", phenology: "Urban peregrines breed 5-7 days earlier than cliff-nesting pairs, with city heat islands affecting their breeding cycle.", linkText: "peregrines" },
+            { date: "5th January", message: "Winter moths emerge on mild nights, vital food for roosting birds", phenology: "Winter moth emergence is becoming more unpredictable, with warm spells followed by cold snaps disrupting their lifecycle and bird food supplies.", linkText: "winter moths" },
+            { date: "6th January", message: "The first hazel catkins are releasing clouds of golden pollen", phenology: "Hazel flowering has advanced by 3 weeks since 1950, extending hay fever seasons and sometimes occurring before female flowers are ready.", linkText: "hazel catkins" },
+            { date: "7th January", message: "Robins are singing lustily, staking out territories for spring", phenology: "Robins sing year-round, but their spring songs now begin in December rather than January, responding to milder winter temperatures.", linkText: "robins" },
+            { date: "8th January", message: "Starling murmurations dance across the evening sky in breathtaking formations", phenology: "Murmurations peak earlier and disperse faster as milder weather reduces the need for communal roosting for warmth.", linkText: "starlings" },
+            { date: "9th January", message: "Common frogs are stirring in pond mud, soon to begin their migration", phenology: "Frog spawning now occurs 2-3 weeks earlier on average, but unpredictable warm spells followed by frosts can kill early spawn.", linkText: "frogs" },
+            { date: "10th January", message: "Yellowhammers flock to stubble fields, their golden heads bright against winter browns", phenology: "Yellowhammers suffer as winter stubble fields disappear due to changing farming practices driven by economic and climate pressures.", linkText: "yellowhammers" },
+            { date: "11th January", message: "Barn owls are hunting over frosted grasslands, their white forms ghostly in moonlight", phenology: "Barn owls breed more frequently in warm years but struggle when climate extremes reduce small mammal populations.", linkText: "barn owls" },
+            { date: "12th January", message: "Alder trees dangle their purple catkins like tiny lanterns", phenology: "Alder catkins now open 2-3 weeks earlier than historical records, sometimes before pollinators are active.", linkText: "alders" },
+            { date: "13th January", message: "Waxwings may appear suddenly, their silk-soft calls announcing an irruption from the north", phenology: "Waxwing irruptions are becoming less predictable as northern berry crops fail more frequently due to weather extremes.", linkText: "waxwings" },
+            { date: "14th January", message: "The first bees emerge on warm winter days, searching for early nectar", phenology: "Bees are emerging 2-4 weeks earlier but finding fewer winter flowers, creating a critical early-season nectar gap.", linkText: "winter bees" },
+            { date: "15th January", message: "Red deer stags are shedding their antlers after the autumn rut", phenology: "Deer rutting seasons have extended due to milder autumns, with stags retaining antlers longer and breeding patterns shifting.", linkText: "red deer" },
+            { date: "16th January", message: "Winter heliotrope carpets verges with vanilla-scented flowers", phenology: "This invasive species benefits from mild winters, flowering for longer periods and spreading more rapidly than native plants.", linkText: "winter heliotrope" },
+            { date: "17th January", message: "Fieldfares call harshly from the tops of hawthorns, their grey heads noble in winter light", phenology: "Fieldfares arrive later and leave earlier as northern Europe warms, shortening their stay in British winter landscapes.", linkText: "fieldfares" },
+            { date: "18th January", message: "The first lesser celandines shine like golden stars in sheltered spots", phenology: "Lesser celandines flower 3-4 weeks earlier than in the 1970s, often appearing before their pollinating insects emerge.", linkText: "lesser celandines" },
+            { date: "19th January", message: "Foxes are barking more frequently as their breeding season approaches", phenology: "Fox breeding has advanced by 2-3 weeks, with cubs born earlier but sometimes facing late cold snaps.", linkText: "foxes" },
+            { date: "20th January", message: "Cormorants spread their wings to dry after fishing in winter waters", phenology: "Cormorants stay year-round in increasing numbers as coastal waters warm, changing fish populations and ecosystem dynamics.", linkText: "cormorants" },
+            { date: "21st January", message: "Winter jasmine cascades in bright yellow sprays over walls and fences", phenology: "Winter jasmine now flowers from December through March rather than January-February, its season extended by milder winters.", linkText: "winter jasmine" },
+            { date: "22nd January", message: "Great spotted woodpeckers drum on resonant branches, the sound echoing through bare woods", phenology: "Woodpecker drumming starts 2-3 weeks earlier, with breeding seasons extending as insect prey remains active longer.", linkText: "woodpeckers" },
+            { date: "23rd January", message: "Turnstones busily flip pebbles on winter beaches, searching for amphipods", phenology: "Rising sea levels and stormier weather are reducing the rocky shore habitats turnstones depend on for winter feeding.", linkText: "turnstones" },
+            { date: "24th January", message: "Primroses unfurl pale yellow petals in woodland clearings", phenology: "Primroses flower 4-5 weeks earlier than Victorian records show, with some blooming continuously through mild winters.", linkText: "primroses" },
+            { date: "25th January", message: "Lapwings gather in large flocks on flooded fields, their calls wild and free", phenology: "Lapwings struggle as winter flooding becomes more unpredictable, with some areas too wet and others too dry for feeding.", linkText: "lapwings" },
+            { date: "26th January", message: "Blackbirds sing tentatively from treetops, testing their voices for spring", phenology: "Male blackbirds begin territorial singing 3-4 weeks earlier than in the 1960s, responding to warmer late-winter temperatures.", linkText: "blackbirds" },
+            { date: "27th January", message: "Gorse blooms defiantly yellow on hillsides, proof that winter cannot last", phenology: "Gorse flowers year-round but peaks are shifting, with longer flowering periods but reduced intensity during traditional peak times.", linkText: "gorse" },
+            { date: "28th January", message: "Long-tailed tits move through bare branches like tiny feathered spirits", phenology: "Long-tailed tits benefit from milder winters with higher survival rates, but extreme weather events still devastate populations.", linkText: "long-tailed tits" },
+            { date: "29th January", message: "Curlews probe soft estuarine mud with their curved bills, their calls haunting", phenology: "Curlews face habitat loss as sea levels rise and winter storms intensify, threatening both feeding and roosting areas.", linkText: "curlews" },
+            { date: "30th January", message: "Pussy willow buds swell silver and soft along riverbanks", phenology: "Pussy willow emerges 2-3 weeks earlier than historical records, sometimes appearing before the last frosts have passed.", linkText: "pussy willow" },
+            { date: "31st January", message: "Song thrushes are already singing from chimney pots and telegraph wires", phenology: "Song thrush territories are established 4-5 weeks earlier than in the 1950s, with some pairs attempting earlier first broods.", linkText: "song thrushes" },
+
+            // FEBRUARY  
+            { date: "1st February", message: "Common frogs begin their epic journey to breeding ponds", phenology: "Frog migration now starts in January rather than February, but late frosts can be catastrophic for early spawning attempts.", linkText: "frogs" },
+            { date: "2nd February", message: "Rooks are renovating last year's nests in the bare crowns of tall trees", phenology: "Rooks begin nesting 2-3 weeks earlier but face more frequent storm damage to colonies from increasingly severe winter weather.", linkText: "rooks" },
+            { date: "3rd February", message: "Daffodil shoots pierce through winter soil like green spears", phenology: "Daffodils emerge 3-4 weeks earlier than in Victorian times, with flowering often complete by traditional Easter celebrations.", linkText: "daffodils" },
+            { date: "4th February", message: "Great tits call their teacher-teacher-teacher song with increasing confidence", phenology: "Great tits start territorial calling 4 weeks earlier on average, with laying dates advanced to match earlier food peaks.", linkText: "great tits" },
+            { date: "5th February", message: "Snowdrops create rivers of white beneath awakening trees", phenology: "Peak snowdrop flowering has moved from February to January, shortening the spectacle but extending it at the beginning.", linkText: "snowdrops" },
+            { date: "6th February", message: "Brimstone butterflies emerge from hibernation on the first warm days", phenology: "Brimstone emergence has advanced by 3-4 weeks, but early butterflies often find no flowers and must re-enter dormancy.", linkText: "brimstone butterflies" },
+            { date: "7th February", message: "Skylarks begin rising and falling over winter fields, their songs ecstatic", phenology: "Skylark song periods have extended but breeding success varies wildly with unpredictable spring weather patterns.", linkText: "skylarks" },
+            { date: "8th February", message: "The first frog spawn appears in shallow pond margins like crystal jewels", phenology: "Spawn now appears 3-4 weeks earlier, but warm spells followed by cold snaps can kill entire pond populations.", linkText: "frog spawn" },
+            { date: "9th February", message: "Hazel nuts left from autumn feed hungry red squirrels through the lean months", phenology: "Nut production has become more erratic with weather extremes, affecting red squirrel survival through winter.", linkText: "red squirrels" },
+            { date: "10th February", message: "Mistle thrushes sing from the highest bare branches, their voices clear and strong", phenology: "Mistle thrushes extend their singing period but breed less successfully as late cold snaps affect their early nesting attempts.", linkText: "mistle thrushes" },
+            { date: "11th February", message: "Coltsfoot's golden coins appear on wasteland and railway banks", phenology: "Coltsfoot flowers 2-3 weeks earlier than historical records, often blooming before leaves emerge, confusing traditional identification.", linkText: "coltsfoot" },
+            { date: "12th February", message: "Grey herons stand motionless beside unfrozen water, patient as statues", phenology: "Herons benefit from less frequent pond freezing but face reduced fish populations in some areas due to changing rainfall patterns.", linkText: "grey herons" },
+            { date: "13th February", message: "Crocuses push through snow and frozen ground with surprising determination", phenology: "Crocuses flower 4-5 weeks earlier than Victorian records, with peak blooming often finished before March arrives.", linkText: "crocuses" },
+            { date: "14th February", message: "Blue tits investigate nest boxes, their bright colors vivid against February's greys", phenology: "Blue tits begin nest prospecting 3-4 weeks earlier but may abandon sites if food sources don't align with later breeding.", linkText: "blue tits" },
+            { date: "15th February", message: "Dog's mercury carpets woodland floors with tiny green flowers", phenology: "Dog's mercury emerges earlier but its brief flowering window increasingly mismatches with pollinator emergence.", linkText: "dog's mercury" },
+            { date: "16th February", message: "Chaffinches' pink breasts grow brighter as breeding condition improves", phenology: "Chaffinch breeding colors develop earlier, but unpredictable food availability affects their ability to maintain condition.", linkText: "chaffinches" },
+            { date: "17th February", message: "The first peacock butterflies emerge from winter hiding places", phenology: "Peacock emergence has advanced by 3-4 weeks, but early butterflies struggle to find nectar sources and often suffer in late cold spells.", linkText: "peacock butterflies" },
+            { date: "18th February", message: "Jackdaws tumble and play in wild February winds", phenology: "Jackdaw pair bonding occurs earlier, but severe storms during their acrobatic displays can disrupt breeding partnerships.", linkText: "jackdaws" },
+            { date: "19th February", message: "Wild garlic shoots emerge like green flames from winter earth", phenology: "Wild garlic emerges 3-4 weeks earlier than in previous decades, with flowering periods often extended but less intense.", linkText: "wild garlic" },
+            { date: "20th February", message: "Buzzards soar on thermals, their mewing calls carrying far in crisp air", phenology: "Buzzards benefit from milder winters with higher prey survival, but extreme weather events can still cause significant mortality.", linkText: "buzzards" },
+            { date: "21st February", message: "Wood pigeons coo more persistently from bare branches", phenology: "Wood pigeon breeding seasons now extend earlier and later, with some pairs attempting additional broods in warming autumns.", linkText: "wood pigeons" },
+            { date: "22nd February", message: "Dunnocks hop mouse-like through undergrowth, their songs surprisingly sweet", phenology: "Dunnock breeding starts 2-3 weeks earlier, but their complex mating systems can be disrupted by unseasonal weather.", linkText: "dunnocks" },
+            { date: "23rd February", message: "Lesser celandine creates golden carpets in damp woodlands", phenology: "Lesser celandine flowering has moved from March to February, often complete before traditional spring flowers appear.", linkText: "lesser celandines" },
+            { date: "24th February", message: "Wrens explode into song from deep within hedgerows and thickets", phenology: "Wren singing intensifies 3-4 weeks earlier, but their insect-dependent diet makes them vulnerable to changing emergence patterns.", linkText: "wrens" },
+            { date: "25th February", message: "The first small tortoiseshell butterflies take tentative flights", phenology: "Small tortoiseshells emerge 4-5 weeks earlier than historical records, often requiring multiple hibernation periods due to false starts.", linkText: "small tortoiseshell butterflies" },
+            { date: "26th February", message: "Badgers emerge more frequently as mating season approaches", phenology: "Badger activity increases earlier, but changing earthworm activity due to soil temperature changes affects their feeding success.", linkText: "badgers" },
+            { date: "27th February", message: "Willow stems glow amber and red as sap begins to rise", phenology: "Willow sap rise occurs 2-3 weeks earlier, with catkin development sometimes outpacing pollinator emergence.", linkText: "willows" },
+            { date: "28th February", message: "Goldfinches gather in chattering flocks around niger and teasel seeds", phenology: "Goldfinches face changing seed availability as plant flowering and seeding times shift, affecting winter survival rates.", linkText: "goldfinches" },
+
+            // MARCH
+            { date: "1st March", message: "Sand martins arrive at their first colonies, their brown and white forms skimming over water", phenology: "Sand martins arrive 5-7 days earlier than in the 1960s, but face mismatches with peak insect emergence that affects breeding success.", linkText: "sand martins" },
+            { date: "2nd March", message: "Nesting herons arrange their great stick platforms in the crowns of trees", phenology: "Herons nest 2-3 weeks earlier but face increased storm damage to colonies during the extended breeding season.", linkText: "herons" },
+            { date: "3rd March", message: "Wood anemones unfold like white stars across woodland floors", phenology: "Wood anemone flowering has advanced by 3 weeks, often occurring before deciduous canopy leaf-out provides optimal light conditions.", linkText: "wood anemones" },
+            { date: "4th March", message: "Lapwings tumble and dive in spectacular aerial displays over their territories", phenology: "Lapwing displays begin earlier but breeding success varies dramatically with increasingly unpredictable spring flooding.", linkText: "lapwings" },
+            { date: "5th March", message: "Blackthorn explodes into white blossom before its leaves appear", phenology: "Blackthorn flowering has moved 2-3 weeks earlier, creating longer gaps between flowering and fruit set.", linkText: "blackthorn" },
+            { date: "6th March", message: "Chiffchaffs call their name repeatedly from willow tops", phenology: "Chiffchaffs arrive 8-10 days earlier than historical records, but some now overwinter in southern Britain rather than migrating.", linkText: "chiffchaffs" },
+            { date: "7th March", message: "Common toads begin their ancient pilgrimage to ancestral ponds", phenology: "Toad migration now starts 2-3 weeks earlier, but road crossings coincide less often with wildlife-friendly wet nights.", linkText: "common toads" },
+            { date: "8th March", message: "Bees visit pussy willow catkins, their bodies dusted with yellow pollen", phenology: "Earlier pussy willow flowering creates vital early nectar, but cold snaps can still strand active bees without food sources.", linkText: "pussy willow" },
+            { date: "9th March", message: "Rooks are building nests in their ancient rookeries, their voices raucous", phenology: "Rookeries become active 3-4 weeks earlier, but late storms increasingly damage nests and reduce breeding success.", linkText: "rooks" },
+            { date: "10th March", message: "Wild daffodils dance in woodland glades like golden sprites", phenology: "Wild daffodils peak 3-4 weeks earlier than Victorian records, with flowering often complete before Easter.", linkText: "wild daffodils" },
+            { date: "11th March", message: "Wheatears arrive on cliff tops and moors, flicking their white rumps", phenology: "Wheatears arrive 5-6 days earlier but face mismatches with ground-dwelling insect emergence in their breeding territories.", linkText: "wheatears" },
+            { date: "12th March", message: "Violets nestle purple and sweet in hedge bottoms and grassy banks", phenology: "Violet flowering extends longer but with reduced peak intensity, affecting the butterflies that depend on them as host plants.", linkText: "violets" },
+            { date: "13th March", message: "Stone curlews return to Breckland heaths, their yellow eyes piercing", phenology: "Stone curlews return to breeding grounds 1-2 weeks earlier but face habitat changes as heathland responds to climate shifts.", linkText: "stone curlews" },
+            { date: "14th March", message: "Dandelions open their first golden clocks of spring", phenology: "Dandelions flower 4-5 weeks earlier than historical records, providing crucial early nectar but competing with native spring flowers.", linkText: "dandelions" },
+            { date: "15th March", message: "House martins arrive at their mud cup nests under the eaves", phenology: "House martins arrive 6-8 days earlier but face reduced insect availability and changing rainfall patterns affecting mud supplies.", linkText: "house martins" },
+            { date: "16th March", message: "Cuckoo flowers carpet damp meadows in lilac and white", phenology: "Cuckoo flowers bloom 2-3 weeks earlier, potentially mismatching with orange tip butterflies that depend on them.", linkText: "cuckoo flowers" },
+            { date: "17th March", message: "Greenfinches trill liquidly from garden feeders and hedgerows", phenology: "Greenfinch breeding begins earlier but populations remain vulnerable to disease outbreaks during mild, wet springs.", linkText: "greenfinches" },
+            { date: "18th March", message: "Primrose woods glow pale yellow in the strengthening spring light", phenology: "Primrose flowering peaks 3-4 weeks earlier, with extended blooming periods but reduced pollinator overlap.", linkText: "primroses" },
+            { date: "19th March", message: "Sand lizards emerge from hibernation on sunny south-facing banks", phenology: "Sand lizard emergence is 2-3 weeks earlier, but unpredictable spring weather affects their ability to thermoregulate effectively.", linkText: "sand lizards" },
+            { date: "20th March", message: "Swallows arrive at their first nesting sites, blue-black backs gleaming", phenology: "Swallows arrive 4-6 days earlier than in the 1960s but face mismatches with peak flying insect abundance.", linkText: "swallows" },
+            { date: "21st March", message: "Adder's-tongue ferns unfurl their single fronds in ancient grasslands", phenology: "Adder's-tongue emergence is less predictable, with changing soil moisture levels affecting their rare grassland habitats.", linkText: "adder's-tongue ferns" },
+            { date: "22nd March", message: "Linnets sing sweetly from gorse bushes, their red breasts bright", phenology: "Linnet breeding starts earlier but their seed-based diet means they're vulnerable to changing plant phenology.", linkText: "linnets" },
+            { date: "23rd March", message: "Wild cherry trees burst into white blossom clouds", phenology: "Wild cherry flowering has advanced 2-3 weeks, creating spectacular displays but shorter blooming periods.", linkText: "wild cherry" },
+            { date: "24th March", message: "Orange tip butterflies dance along hedgerows in search of garlic mustard", phenology: "Orange tips emerge 3-4 weeks earlier but face mismatches with their host plants' flowering times.", linkText: "orange tip butterflies" },
+            { date: "25th March", message: "Willow warblers arrive with their sweet descending songs", phenology: "Willow warblers arrive 7-9 days earlier but declining populations suggest climate impacts on their African wintering grounds.", linkText: "willow warblers" },
+            { date: "26th March", message: "Greater stitchwort stars the hedgerows with white flowers", phenology: "Stitchwort flowers 2-3 weeks earlier, creating beautiful displays but changing the timing of hedgerow ecology.", linkText: "greater stitchwort" },
+            { date: "27th March", message: "Redstarts arrive at oak woodlands, their russet tails flicking", phenology: "Redstarts arrive 5-7 days earlier but face mismatches with caterpillar peaks crucial for feeding their young.", linkText: "redstarts" },
+            { date: "28th March", message: "Grape hyacinths create blue rivers beneath orchard trees", phenology: "Grape hyacinth flowering extends over longer periods but with less intensity, affecting their visual impact.", linkText: "grape hyacinths" },
+            { date: "29th March", message: "Yellow wagtails return to waterside meadows, their calls bright", phenology: "Yellow wagtails arrive 4-6 days earlier but face habitat loss as flooding patterns change with climate.", linkText: "yellow wagtails" },
+            { date: "30th March", message: "Cowslips nod golden heads in old pastures and railway embankments", phenology: "Cowslip flowering has advanced 3-4 weeks, with extended seasons but reduced peak abundance in traditional hay meadows.", linkText: "cowslips" },
+            { date: "31st March", message: "Common lizards bask on sunny stones, their colors bright after winter", phenology: "Lizard emergence is 3-4 weeks earlier, but their insect prey emergence timing is shifting differently, affecting feeding success.", linkText: "common lizards" },
+
+            // APRIL
+            { date: "1st April", message: "Female cuckoos are arriving", phenology: "Cuckoos now arrive 5-7 days earlier than in the 1960s, but their host species' breeding timing hasn't shifted equally.", linkText: "cuckoos" },
+            { date: "2nd April", message: "Ash trees unfurl their purple-black buds into feathery leaves", phenology: "Ash leafing has advanced 2-3 weeks, but ash dieback disease compounds climate stress on these important trees.", linkText: "ash trees" },
+            { date: "3rd April", message: "Comma butterflies emerge from hibernation, their wing edges ragged", phenology: "Comma butterflies emerge 3-4 weeks earlier, often requiring multiple emergence attempts as weather remains unpredictable.", linkText: "comma butterflies" },
+            { date: "4th April", message: "Garden warblers arrive in thick cover, their songs rich and varied", phenology: "Garden warblers arrive 6-8 days earlier but face habitat changes as scrubland management responds to climate pressures.", linkText: "garden warblers" },
+            { date: "5th April", message: "Bluebells carpet beech woods in sheets of azure", phenology: "Bluebell flowering has moved 2-3 weeks earlier, shortening the spectacular display period that attracts millions of visitors.", linkText: "bluebells" },
+            { date: "6th April", message: "Whitethroats arrive with harsh scratchy songs from thorny thickets", phenology: "Whitethroats arrive 5-7 days earlier but populations fluctuate with Sahel rainfall affecting their African wintering grounds.", linkText: "whitethroats" },
+            { date: "7th April", message: "Sweet woodruff stars woodland floors with tiny white flowers", phenology: "Woodruff flowers earlier in the spring, but changing light conditions under trees affect its traditional woodland carpet displays.", linkText: "sweet woodruff" },
+            { date: "8th April", message: "Sand martins are hawking for flies over the first warm waters", phenology: "Sand martins face earlier emergence but variable insect abundance, with some arriving before peak food availability.", linkText: "sand martins" },
+            { date: "9th April", message: "Hawthorn leaves burst from their winter buds in vivid green", phenology: "Hawthorn leafing occurs 2-3 weeks earlier, extending the growing season but making trees vulnerable to late frosts.", linkText: "hawthorn" },
+            { date: "10th April", message: "Sedge warblers arrive at reedbeds with their chattering songs", phenology: "Sedge warblers arrive 4-6 days earlier but face habitat loss as wetland management adapts to changing water levels.", linkText: "sedge warblers" },
+            { date: "11th April", message: "Wild strawberry flowers dot woodland edges like tiny white stars", phenology: "Wild strawberry flowering extends longer but fruit production varies with unpredictable late spring weather.", linkText: "wild strawberry" },
+            { date: "12th April", message: "Reed warblers return to their swaying territories in the reed beds", phenology: "Reed warblers arrive 5-7 days earlier but face changing reed growth patterns as water temperatures warm.", linkText: "reed warblers" },
+            { date: "13th April", message: "Jack-by-the-hedge unfolds its heart-shaped leaves along shady paths", phenology: "Garlic mustard emerges earlier but its crucial role as butterfly host plant may be disrupted by timing changes.", linkText: "garlic mustard" },
+            { date: "14th April", message: "Tree sparrows chatter around farm buildings and old orchards", phenology: "Tree sparrows benefit from milder springs but suffer from changing farming practices driven by climate adaptation.", linkText: "tree sparrows" },
+            { date: "15th April", message: "Marsh marigolds glow like golden cups in wet meadows", phenology: "Marsh marigold flowering is 2-3 weeks earlier, but their wetland habitats face increasing summer drought stress.", linkText: "marsh marigolds" },
+            { date: "16th April", message: "Blackcaps arrive with their rich fluting songs", phenology: "Blackcaps arrive 6-8 days earlier, with increasing numbers now overwintering in Britain rather than migrating south.", linkText: "blackcaps" },
+            { date: "17th April", message: "Ground ivy carpets shady corners with purple-blue flowers", phenology: "Ground ivy flowers over extended periods but traditional peak timing is shifting, affecting its role in early pollinator networks.", linkText: "ground ivy" },
+            { date: "18th April", message: "Pied flycatchers arrive at oak woodlands from West Africa", phenology: "Pied flycatchers arrive 4-6 days earlier but face severe mismatches with peak caterpillar abundance needed for breeding.", linkText: "pied flycatchers" },
+            { date: "19th April", message: "Wood sorrel opens white flowers like tiny pink-veined parasols", phenology: "Wood sorrel flowering is less predictable, with changing forest floor conditions affecting this delicate woodland plant.", linkText: "wood sorrel" },
+            { date: "20th April", message: "Turtle doves arrive with their soft purring songs", phenology: "Turtle doves arrive 3-5 days earlier but populations continue declining due to habitat loss and drought in wintering areas.", linkText: "turtle doves" },
+            { date: "21st April", message: "Rowan trees unfurl their feathery leaves and flower clusters", phenology: "Rowan leafing and flowering advance together, maintaining synchrony but shifting the timing of mountain ecosystem interactions.", linkText: "rowan trees" },
+            { date: "22nd April", message: "Wood warblers arrive with their spinning-coin songs in sessile oak woods", phenology: "Wood warblers arrive 7-9 days earlier but face population declines possibly linked to changing caterpillar phenology.", linkText: "wood warblers" },
+            { date: "23rd April", message: "Red campion glows like pink lanterns in woodland clearings", phenology: "Red campion flowering extends longer but peak timing shifts, affecting its synchronized relationship with pollinating moths.", linkText: "red campion" },
+            { date: "24th April", message: "Tree pipits arrive at heathland edges with their parachuting song flights", phenology: "Tree pipits arrive 4-6 days earlier but face habitat changes as heathlands respond to temperature and rainfall shifts.", linkText: "tree pipits" },
+            { date: "25th April", message: "Wild garlic carpets damp woods with white star flowers", phenology: "Wild garlic flowers 3-4 weeks earlier, creating spectacular but shorter-lived displays in ancient woodlands.", linkText: "wild garlic" },
+            { date: "26th April", message: "Yellow hammers sing 'little bit of bread and no cheese' from hedgetops", phenology: "Yellowhammer breeding starts earlier but populations decline as agricultural changes reduce seed availability year-round.", linkText: "yellowhammers" },
+            { date: "27th April", message: "Herb robert spreads its delicate pink flowers across shady banks", phenology: "Herb robert flowers over longer periods with multiple flushes, adapting well to changing spring conditions.", linkText: "herb robert" },
+            { date: "28th April", message: "Grasshopper warblers arrive with their reeling songs from thick cover", phenology: "Grasshopper warblers arrive 5-7 days earlier but face habitat loss as scrubland management responds to fire risk changes.", linkText: "grasshopper warblers" },
+            { date: "29th April", message: "Forget-me-nots create blue mists along stream sides", phenology: "Forget-me-not flowering extends but peak intensity reduces, changing the character of streamside spring displays.", linkText: "forget-me-nots" },
+            { date: "30th April", message: "Nightingales arrive in southern thickets with their legendary songs", phenology: "Nightingales arrive 4-6 days earlier but declining populations suggest climate impacts on breeding success and migration routes.", linkText: "nightingales" }
         ];
 
         let currentMessageIndex = 0;
         let touchStartX = 0;
         let touchEndX = 0;
 
-        function formatDate(date = new Date()) {
-            const day = date.getDate();
-            const month = date.toLocaleDateString('en-US', { month: 'long' });
-            
-            // Add ordinal suffix (st, nd, rd, th)
-            const getOrdinalSuffix = (day) => {
-                if (day > 3 && day < 21) return 'th';
-                switch (day % 10) {
-                    case 1: return 'st';
-                    case 2: return 'nd';
-                    case 3: return 'rd';
-                    default: return 'th';
-                }
-            };
-            
-            return `${day}${getOrdinalSuffix(day)} ${month}`;
+        function formatDate(dateStr) {
+            const [day, month] = dateStr.split(' ');
+            return `${day} ${month}`;
         }
 
-        function getCurrentMessage() {
-            return natureMessages[currentMessageIndex];
+        function getPrevNextDates(index) {
+            const prevIndex = index > 0 ? index - 1 : natureMessages.length - 1;
+            const nextIndex = index < natureMessages.length - 1 ? index + 1 : 0;
+            
+            return {
+                prev: formatDate(natureMessages[prevIndex].date),
+                next: formatDate(natureMessages[nextIndex].date)
+            };
         }
 
         function showMessage(index) {
             const message = natureMessages[index];
-            document.getElementById('currentDate').textContent = message.date;
+            const dates = getPrevNextDates(index);
             
-            // Update image
-            const imageElement = document.getElementById('natureImage');
-            imageElement.src = message.image;
-            imageElement.alt = `Illustration of ${message.linkText}`;
+            document.getElementById('currentDate').textContent = message.date;
             
             // Create message with linked text
             const messageElement = document.getElementById('dailyMessage');
@@ -362,7 +370,7 @@
             if (linkText && messageText.includes(linkText)) {
                 const linkedMessage = messageText.replace(
                     linkText, 
-                    `<a href="${message.link}" target="_blank" style="color: #2980b9; text-decoration: underline;">${linkText}</a>`
+                    `<span style="color: #2980b9; font-weight: 500;">${linkText}</span>`
                 );
                 messageElement.innerHTML = linkedMessage;
             } else {
@@ -370,28 +378,24 @@
             }
             
             document.getElementById('phenologyInfo').innerHTML = 
-                `<span class="phenology-label">Impacts of a changing climate</span>${message.phenology}`;
+                `<span class="phenology-label">Impacts of a warming climate</span>${message.phenology}`;
             
-            // Update page indicator
-            document.getElementById('pageIndicator').textContent = `${index + 1} / ${natureMessages.length}`;
+            // Update navigation buttons with dates
+            document.getElementById('prevBtn').textContent = `← ${dates.prev}`;
+            document.getElementById('nextBtn').textContent = `${dates.next} →`;
             
-            // Update navigation buttons
-            document.getElementById('prevBtn').disabled = index === 0;
-            document.getElementById('nextBtn').disabled = index === natureMessages.length - 1;
+            document.getElementById('prevBtn').disabled = false;
+            document.getElementById('nextBtn').disabled = false;
         }
 
         function nextMessage() {
-            if (currentMessageIndex < natureMessages.length - 1) {
-                currentMessageIndex++;
-                showMessage(currentMessageIndex);
-            }
+            currentMessageIndex = (currentMessageIndex + 1) % natureMessages.length;
+            showMessage(currentMessageIndex);
         }
 
         function previousMessage() {
-            if (currentMessageIndex > 0) {
-                currentMessageIndex--;
-                showMessage(currentMessageIndex);
-            }
+            currentMessageIndex = (currentMessageIndex - 1 + natureMessages.length) % natureMessages.length;
+            showMessage(currentMessageIndex);
         }
 
         // Touch/Swipe functionality
@@ -433,7 +437,7 @@
         }
 
         function initializeApp() {
-            // Start with May 1st (index 0)
+            // Start with January 1st (index 0)
             currentMessageIndex = 0;
             showMessage(currentMessageIndex);
             
