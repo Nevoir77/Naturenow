@@ -12,6 +12,11 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="NatureNow">
     
+    <!-- PWA Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23667eea'/><text x='50%' y='50%' text-anchor='middle' dy='0.3em' font-size='40'>🌿</text></svg>">
+    <link rel="icon" type="image/png" sizes="512x512" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23667eea'/><text x='50%' y='50%' text-anchor='middle' dy='0.3em' font-size='40'>🌿</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23667eea'/><text x='50%' y='50%' text-anchor='middle' dy='0.3em' font-size='40'>🌿</text></svg>">
+    
     <style>
         * {
             margin: 0;
@@ -28,7 +33,6 @@
             justify-content: center;
             color: #333;
             line-height: 1.6;
-            overflow-x: hidden;
         }
 
         .container {
@@ -36,7 +40,6 @@
             border-radius: 20px;
             padding: 40px;
             max-width: 600px;
-            width: 90%;
             margin: 20px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(10px);
@@ -49,6 +52,24 @@
 
         .container:hover {
             transform: translateY(-5px);
+        }
+
+        .learn-more {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 16px;
+            background: rgba(52, 152, 219, 0.1);
+            color: #2980b9;
+            text-decoration: none;
+            border-radius: 15px;
+            font-size: 14px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .learn-more:hover {
+            background: rgba(52, 152, 219, 0.2);
+            transform: translateY(-1px);
         }
 
         .date {
@@ -66,18 +87,6 @@
             margin-bottom: 20px;
             font-weight: 400;
             animation: fadeIn 1s ease-in;
-            line-height: 1.4;
-        }
-
-        .message a {
-            color: #2980b9;
-            font-weight: 500;
-            text-decoration: underline;
-            transition: color 0.3s ease;
-        }
-
-        .message a:hover {
-            color: #1a5490;
         }
 
         .phenology-info {
@@ -88,7 +97,6 @@
             border-radius: 10px;
             margin-bottom: 30px;
             animation: slideIn 1s ease-in 0.3s both;
-            text-align: left;
         }
 
         .phenology-label {
@@ -99,7 +107,12 @@
             font-size: 14px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            text-align: center;
+        }
+
+        .nature-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
         }
 
         .navigation {
@@ -114,14 +127,17 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 8px 12px;
             border-radius: 15px;
-            font-size: 14px;
+            font-size: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: inherit;
-            min-width: 80px;
-            font-weight: 500;
+            min-width: 60px;
+            max-width: 120px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .nav-btn:hover {
@@ -129,29 +145,11 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .nav-btn:active {
-            transform: translateY(0);
-        }
-
         .nav-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
-        }
-
-        .loading {
-            opacity: 0.6;
-            animation: pulse 1.5s infinite;
-        }
-
-        .error {
-            color: #e74c3c;
-            background: rgba(231, 76, 60, 0.1);
-            border: 1px solid rgba(231, 76, 60, 0.3);
-            border-radius: 10px;
-            padding: 15px;
-            margin: 15px 0;
         }
 
         @keyframes fadeIn {
@@ -165,40 +163,13 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 1; }
-        }
-
-        .swipe-hint {
-            position: absolute;
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.7);
-            animation: fadeIn 2s ease-in 1s both;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 30px 25px;
-                margin: 15px;
-                width: 95%;
-            }
-            
-            .message {
-                font-size: 22px;
-            }
-
-            .phenology-info {
-                font-size: 15px;
-                padding: 12px;
-            }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
         @media (max-width: 480px) {
             .container {
-                padding: 25px 20px;
+                padding: 30px 20px;
                 margin: 10px;
             }
             
@@ -211,139 +182,223 @@
             }
 
             .nav-btn {
-                padding: 10px 16px;
-                font-size: 13px;
-                min-width: 70px;
-            }
-
-            .phenology-info {
-                font-size: 14px;
+                padding: 6px 10px;
+                font-size: 10px;
+                min-width: 50px;
+                max-width: 100px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container" id="mainContainer">
-        <div class="date" id="currentDate">Loading...</div>
-        <div class="message loading" id="dailyMessage">Loading your daily nature message...</div>
-        <div class="phenology-info loading" id="phenologyInfo">
+        <div class="date" id="currentDate"></div>
+        <div class="message" id="dailyMessage">Loading your daily nature message...</div>
+        <div class="phenology-info" id="phenologyInfo">
             <span class="phenology-label">Impacts of a warming climate</span>
             Loading phenology information...
         </div>
         
         <div class="navigation">
-            <button class="nav-btn" id="prevBtn" onclick="previousMessage()" disabled>← Previous</button>
-            <button class="nav-btn" id="nextBtn" onclick="nextMessage()" disabled>Next →</button>
+            <button class="nav-btn" id="prevBtn" onclick="previousMessage()">< Prev</button>
+            <button class="nav-btn" id="nextBtn" onclick="nextMessage()">Next ></button>
         </div>
-        
-        <div class="swipe-hint">Swipe or use arrow keys to navigate</div>
     </div>
 
     <script>
-        let natureData = null;
+        const natureMessages = [
+            // AUGUST (from 22nd)
+            { date: "22nd August", message: "Blackberries ripen in hedgerows, their dark juice staining fingers", phenology: "Blackberry ripening occurs 1-2 weeks earlier than in the 1980s, with extended fruiting seasons providing food over longer periods.", linkText: "blackberries" },
+            { date: "23rd August", message: "Swallows gather on telegraph wires, preparing for their epic journey south", phenology: "Swallow departure timing remains relatively stable, but breeding seasons now extend later, with some attempting third broods.", linkText: "swallows" },
+            { date: "24th August", message: "Rowan berries glow orange-red in mountain woods", phenology: "Rowan fruiting has advanced by 10-12 days, affecting the timing of autumn bird migrations that depend on these berries.", linkText: "rowan berries" },
+            { date: "25th August", message: "Young starlings form chattering flocks in suburban parks", phenology: "Starling flock formation occurs earlier as breeding seasons extend, but flock sizes are smaller due to overall population declines.", linkText: "starlings" },
+            { date: "26th August", message: "Common darters patrol garden ponds in the late summer heat", phenology: "Dragonfly activity periods have extended by 2-3 weeks, with some species now active well into October.", linkText: "common darters" },
+            { date: "27th August", message: "Wild clematis adorns hedges with fluffy seed heads like old man's beard", phenology: "Clematis seed dispersal timing has shifted later, extending into autumn and changing winter hedgerow appearance.", linkText: "wild clematis" },
+            { date: "28th August", message: "Migrant hawker dragonflies hunt over heathland pools", phenology: "Hawker dragonflies now emerge 2-3 weeks earlier and remain active longer, overlapping with species not historically sympatric.", linkText: "migrant hawkers" },
+            { date: "29th August", message: "House martins gather mud for their late broods under the eaves", phenology: "House martins attempt later broods more frequently, but face challenges from reduced insect availability in late summer.", linkText: "house martins" },
+            { date: "30th August", message: "Hazel nuts ripen green and milky in their leafy cups", phenology: "Hazel nut ripening has advanced 7-10 days, sometimes occurring before squirrels have finished with their earlier food sources.", linkText: "hazel nuts" },
+            { date: "31st August", message: "Painted lady butterflies continue their endless migration across gardens", phenology: "Painted lady migrations are becoming more unpredictable, with some populations overwintering in southern Britain.", linkText: "painted ladies" },
+
+            // SEPTEMBER
+            { date: "1st September", message: "Speckled wood butterflies dance in dappled woodland clearings", phenology: "Speckled woods now produce an additional generation in warmer years, extending their flight period into November.", linkText: "speckled woods" },
+            { date: "2nd September", message: "Fieldfares arrive from Scandinavia with harsh chattering calls", phenology: "Fieldfare arrival has delayed by 2-3 weeks as northern European autumns warm, shortening their British residence.", linkText: "fieldfares" },
+            { date: "3rd September", message: "Elderberries hang in heavy purple clusters", phenology: "Elder fruiting occurs 10-14 days earlier, with extended seasons but sometimes reduced berry quality in drought years.", linkText: "elderberries" },
+            { date: "4th September", message: "Red admiral butterflies feast on buddleia flowers in gardens", phenology: "Red admirals now overwinter in increasing numbers rather than migrating, changing from migrants to residents.", linkText: "red admirals" },
+            { date: "5th September", message: "Crab apples fall pink and yellow beneath ancient trees", phenology: "Crab apple fruiting has advanced 8-12 days, affecting wildlife that depend on this autumn food source.", linkText: "crab apples" },
+            { date: "6th September", message: "Redwings call softly as they arrive from northern forests", phenology: "Redwing arrival is delayed by 3-4 weeks, with some populations staying in Scandinavia through milder winters.", linkText: "redwings" },
+            { date: "7th September", message: "Hornets hunt insects around fallen fruit", phenology: "Hornet colonies remain active 3-4 weeks longer than historically, with some surviving mild winters.", linkText: "hornets" },
+            { date: "8th September", message: “Pink waxcap mushrooms emerge in unimproved grasslands", phenology: "Waxcap fruiting periods have become more erratic, with some species appearing earlier but others delayed.", linkText: "waxcap mushrooms" },
+            { date: "9th September", message: "Comma butterflies seek overwintering sites in ivy and brambles", phenology: "Comma butterflies now produce additional broods in warm years, with some individuals active into December.", linkText: "comma butterflies" },
+            { date: "10th September", message: "Sloe berries bloom with blue-white waxy coating", phenology: "Sloe ripening has advanced 6-8 days, sometimes occurring before traditional sloe gin making time.", linkText: "sloe berries" },
+            { date: "11th September", message: "Peacock butterflies gather on sedum flowers, wings brilliant in autumn sun", phenology: "Peacock butterflies extend their active period by 2-3 weeks, delaying hibernation in warm autumns.", linkText: "peacock butterflies" },
+            { date: "12th September", message: "Field mushrooms appear overnight in sheep-grazed pastures", phenology: "Mushroom fruiting has become less predictable, with traditional autumn flushes sometimes occurring in summer.", linkText: "field mushrooms" },
+            { date: "13th September", message: "Winter moths begin emerging for their flightless mating rituals", phenology: "Winter moth emergence timing is shifting and extending, with impacts on spring bird breeding that depend on caterpillars.", linkText: "winter moths" },
+            { date: "14th September", message: "Beechnuts fall in their prickly cases beneath ancient trees", phenology: "Beech mast years are becoming more frequent but less predictable, affecting woodland wildlife cycles.", linkText: "beechnuts" },
+            { date: "15th September", message: "Migrant yellow wagtails gather in stubble fields", phenology: "Yellow wagtail migration timing remains stable, but populations decline due to reduced insect abundance.", linkText: "yellow wagtails" },
+            { date: "16th September", message: "Ivy begins its late flowering, vital for autumn insects", phenology: "Ivy flowering occurs 5-7 days earlier, providing crucial late nectar but sometimes finishing before all insects need it.", linkText: "ivy flowers" },
+            { date: "17th September", message: "Conkers fall glossy and brown from horse chestnut trees", phenology: "Conker fall occurs 1-2 weeks earlier, but leaf-miner damage often reduces seed viability.", linkText: "conkers" },
+            { date: "18th September", message: "Swallows line up on rooftops, their departure imminent", phenology: "Swallow departure has become more variable, with some populations leaving 1-2 weeks later than historically.", linkText: "swallow departure" },
+            { date: "19th September", message: "Rosehips glow red and orange in hedgerows and gardens", phenology: "Rose hip formation occurs earlier but with more variable vitamin C content due to summer temperature stress.", linkText: "rosehips" },
+            { date: "20th September", message: "Meadow saffron flowers emerge from bare earth without leaves", phenology: "Meadow saffron flowering has advanced 8-10 days, sometimes completing before optimal soil conditions develop.", linkText: "meadow saffron" },
+            { date: "21st September", message: "House spiders emerge seeking mates in autumn corners", phenology: "Spider mating seasons have extended by 2-3 weeks, with activity continuing later into autumn.", linkText: "house spiders" },
+            { date: "22nd September", message: "Acorns ripen and fall beneath oak trees", phenology: "Acorn production cycles are becoming more erratic, with climate stress affecting oak reproductive success.", linkText: "acorns" },
+            { date: "23rd September", message: "Brimstone butterflies seek buckthorn bushes for egg-laying", phenology: "Brimstone egg-laying extends later into autumn, but larval development faces unpredictable spring timing.", linkText: "brimstone butterflies" },
+            { date: "24th September", message: "Robins sing territorial songs as they establish winter territories", phenology: "Robin territory establishment occurs 1-2 weeks earlier, with winter singing periods extending longer.", linkText: "robin territories" },
+            { date: "25th September", message: "Haws ripen red on hawthorn branches", phenology: "Hawthorn berry ripening has advanced 5-8 days, affecting birds that time migration with this food source.", linkText: "haws" },
+            { date: "26th September", message: "Small copper butterflies bask on sedum flowers", phenology: "Small coppers now produce additional broods, with some flying into November in warm years.", linkText: "small coppers" },
+            { date: "27th September", message: "Fieldfares strip berry bushes with their harsh calls", phenology: "Fieldfare feeding behavior changes as berry ripening times shift, forcing adaptation to new food sequences.", linkText: "fieldfare feeding" },
+            { date: "28th September", message: "Hornbeam leaves turn yellow-gold in ancient woodlands", phenology: "Hornbeam leaf color change occurs 6-8 days later, with autumn colors less intense in warm years.", linkText: "hornbeam leaves" },
+            { date: "29th September", message: "Red kites soar over valleys, their numbers slowly recovering", phenology: "Red kite breeding seasons extend longer, but extreme weather events during nesting affect success rates.", linkText: "red kites" },
+            { date: "30th September", message: "Autumn crocuses push through fallen leaves in ancient meadows", phenology: "Autumn crocus flowering has become more unpredictable, with some populations flowering weeks apart.", linkText: "autumn crocuses" }
+        ];
+
         let currentMessageIndex = 0;
         let touchStartX = 0;
         let touchEndX = 0;
-        let isLoading = true;
 
-        // Load data from external JSON file
-        async function loadNatureData() {
-            try {
-                const response = await fetch('nature-data.json');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                natureData = await response.json();
-                return true;
-            } catch (error) {
-                console.error('Error loading nature data:', error);
-                showError('Failed to load nature data. Please check that nature-data.json exists in the same directory.');
-                return false;
-            }
+        function formatDate(dateStr) {
+            const [day, month] = dateStr.split(' ');
+            return `${day} ${month}`;
         }
 
-        function showError(message) {
-            document.getElementById('dailyMessage').innerHTML = `<div class="error">${message}</div>`;
-            document.getElementById('phenologyInfo').innerHTML = '';
-            document.getElementById('currentDate').textContent = 'Error';
+        function getPrevNextDates(index) {
+            const prevIndex = index > 0 ? index - 1 : natureMessages.length - 1;
+            const nextIndex = index < natureMessages.length - 1 ? index + 1 : 0;
+            
+            return {
+                prev: formatDate(natureMessages[prevIndex].date),
+                next: formatDate(natureMessages[nextIndex].date)
+            };
         }
 
-        function createLinkedMessage(message, speciesInMessage) {
+        // Species linking configuration
+        const speciesLinks = {
+            // Birds
+            'swallows': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/swallow/',
+            'swallow departure': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/swallow/',
+            'starlings': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/starling/',
+            'house martins': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/house-martin/',
+            'fieldfares': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/fieldfare/',
+            'fieldfare feeding': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/fieldfare/',
+            'redwings': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/redwing/',
+            'yellow wagtails': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/yellow-wagtail/',
+            'robins': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/robin/',
+            'robin territories': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/robin/',
+            'red kites': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/red-kite/',
+            
+            // Invertebrates
+            'common darters': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/dragonflies/common-darter',
+            'migrant hawkers': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/dragonflies-and-damselflies/migrant-hawker',
+            'migrant hawker dragonflies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/dragonflies/migrant-hawker',
+            'painted ladies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/painted-lady',
+            'painted lady butterflies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/painted-lady',
+            'speckled woods': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/speckled-wood',
+            'speckled wood butterflies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/speckled-wood',
+            'red admirals': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/red-admiral',
+            'red admiral butterflies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/red-admiral',
+            'comma butterflies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/comma',
+            'peacock butterflies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/peacock',
+            'winter moths': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/moths/winter-moth',
+            'brimstone butterflies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/brimstone',
+            'small coppers': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/small-copper',
+            'small copper butterflies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/small-copper',
+            'hornets': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/bees-wasps-and-ants/hornet',
+            'house spiders': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/spiders/giant-house-spider',
+            
+            // Plants
+            'blackberries': 'https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/plants/wild-flowers/bramble/',
+            'rowan berries': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/rowan',
+            'wild clematis': 'https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/plants/wild-flowers/travellers-joy/',
+            'hazel nuts': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/hazel',
+            'elderberries': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/elder',
+            'crab apples': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/crab-apple',
+            'sloe berries': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/blackthorn',
+            'beechnuts': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/common-beech',
+            'ivy flowers': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/ivy',
+            'ivy': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/ivy',
+            'conkers': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/horse-chestnut',
+            'rosehips': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/dog-rose',
+            'meadow saffron': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/meadow-saffron',
+            'acorns': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/english-oak',
+            'haws': 'https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/british-trees/a-z-of-british-trees/hawthorn/',
+            'hornbeam leaves': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/common-hornbeam',
+            'autumn crocuses': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/meadow-saffron',
+            'buddleia flowers': 'https://www.rhs.org.uk/plants/buddleja',
+            'sedum flowers': 'https://www.rhs.org.uk/plants/hylotelephium',
+            'buckthorn bushes': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/purging-buckthorn',
+            
+            // Fungi
+            'waxcap mushrooms': 'https://www.wildlifetrusts.org/wildlife-explorer/fungi/pink-waxcap',
+            'field mushrooms': 'https://totallywilduk.co.uk/2022/01/17/field-mushroom-agaricus-campestris-identification/'
+        };
+
+        function createLinkedMessage(message) {
             let linkedMessage = message;
             
-            // Use the species array from the message data if available
-            if (speciesInMessage && Array.isArray(speciesInMessage)) {
-                speciesInMessage.forEach(species => {
-                    const link = natureData.speciesLinks[species];
-                    if (link) {
-                        const regex = new RegExp(`\\b${species}\\b`, 'gi');
-                        linkedMessage = linkedMessage.replace(regex, (match, offset) => {
-                            const isStartOfSentence = offset === 0 || linkedMessage.substring(offset - 2, offset) === '. ';
-                            const displayText = isStartOfSentence ? 
-                                match.charAt(0).toUpperCase() + match.slice(1).toLowerCase() : 
-                                match.toLowerCase();
-                            
-                            return `<a href="${link}" target="_blank" rel="noopener noreferrer">${displayText}</a>`;
-                        });
-                    }
-                });
-            }
+            // Sort species by length (longest first) to avoid partial replacements
+            const sortedSpecies = Object.keys(speciesLinks).sort((a, b) => b.length - a.length);
+            
+            sortedSpecies.forEach(species => {
+                const regex = new RegExp(`\\b${species}\\b`, 'gi');
+                if (regex.test(linkedMessage)) {
+                    linkedMessage = linkedMessage.replace(regex, (match, offset) => {
+                        // Check if this is at the start of a sentence (beginning or after '. ')
+                        const isStartOfSentence = offset === 0 || linkedMessage.substring(offset - 2, offset) === '. ';
+                        const displayText = isStartOfSentence ? 
+                            match.charAt(0).toUpperCase() + match.slice(1).toLowerCase() : 
+                            match.toLowerCase();
+                        
+                        return `<a href="${speciesLinks[species]}" target="_blank" rel="noopener noreferrer" style="color: #2980b9; font-weight: 500; text-decoration: underline;">${displayText}</a>`;
+                    });
+                }
+            });
             
             return linkedMessage;
         }
 
         function showMessage(index) {
-            if (!natureData || !natureData.messages[index]) return;
-            
-            const message = natureData.messages[index];
-            
-            // Remove loading class
-            document.getElementById('dailyMessage').classList.remove('loading');
-            document.getElementById('phenologyInfo').classList.remove('loading');
+            const message = natureMessages[index];
+            const dates = getPrevNextDates(index);
             
             document.getElementById('currentDate').textContent = message.date;
             
             // Create message with species links
             const messageElement = document.getElementById('dailyMessage');
-            const linkedMessage = createLinkedMessage(message.message, message.species);
+            const linkedMessage = createLinkedMessage(message.message);
             messageElement.innerHTML = linkedMessage;
             
-            // Show phenology information
+            // Show phenology information WITHOUT links
             document.getElementById('phenologyInfo').innerHTML = 
                 `<span class="phenology-label">Impacts of a warming climate</span>${message.phenology}`;
             
-            // Update navigation buttons
+            // Update navigation buttons with dates
+            document.getElementById('prevBtn').textContent = `< Prev`;
+            document.getElementById('nextBtn').textContent = `Next >`;
+            
             document.getElementById('prevBtn').disabled = false;
             document.getElementById('nextBtn').disabled = false;
-            
-            isLoading = false;
         }
 
         function nextMessage() {
-            if (isLoading || !natureData) return;
-            currentMessageIndex = (currentMessageIndex + 1) % natureData.messages.length;
+            currentMessageIndex = (currentMessageIndex + 1) % natureMessages.length;
             showMessage(currentMessageIndex);
         }
 
         function previousMessage() {
-            if (isLoading || !natureData) return;
-            currentMessageIndex = (currentMessageIndex - 1 + natureData.messages.length) % natureData.messages.length;
+            currentMessageIndex = (currentMessageIndex - 1 + natureMessages.length) % natureMessages.length;
             showMessage(currentMessageIndex);
         }
 
         // Touch/Swipe functionality
         function handleTouchStart(event) {
-            if (isLoading) return;
             touchStartX = event.touches[0].clientX;
         }
 
         function handleTouchMove(event) {
-            if (isLoading) return;
-            event.preventDefault();
+            event.preventDefault(); // Prevent scrolling
         }
 
         function handleTouchEnd(event) {
-            if (isLoading) return;
             touchEndX = event.changedTouches[0].clientX;
             handleSwipe();
         }
@@ -354,8 +409,10 @@
 
             if (Math.abs(swipeDistance) > swipeThreshold) {
                 if (swipeDistance > 0) {
+                    // Swipe right - go to previous day
                     previousMessage();
                 } else {
+                    // Swipe left - go to next day
                     nextMessage();
                 }
             }
@@ -363,7 +420,6 @@
 
         // Keyboard navigation
         function handleKeyPress(event) {
-            if (isLoading) return;
             if (event.key === 'ArrowLeft') {
                 previousMessage();
             } else if (event.key === 'ArrowRight') {
@@ -371,43 +427,23 @@
             }
         }
 
-        async function initializeApp() {
-            try {
-                // Load data from external JSON
-                const dataLoaded = await loadNatureData();
-                if (!dataLoaded) return;
-
-                // Start with August 22nd (index 0)
-                currentMessageIndex = 0;
-                
-                // Add event listeners
-                const container = document.getElementById('mainContainer');
-                if (container) {
-                    container.addEventListener('touchstart', handleTouchStart, { passive: false });
-                    container.addEventListener('touchmove', handleTouchMove, { passive: false });
-                    container.addEventListener('touchend', handleTouchEnd, { passive: false });
-                }
-                
-                // Add keyboard navigation
-                document.addEventListener('keydown', handleKeyPress);
-                
-                // Show initial message with a slight delay for better UX
-                setTimeout(() => {
-                    showMessage(currentMessageIndex);
-                }, 100);
-                
-            } catch (error) {
-                console.error('Error initializing app:', error);
-                showError('Error initializing application. Please refresh the page.');
-            }
+        function initializeApp() {
+            // Start with August 22nd (index 0)
+            currentMessageIndex = 0;
+            showMessage(currentMessageIndex);
+            
+            // Add touch event listeners
+            const container = document.getElementById('mainContainer');
+            container.addEventListener('touchstart', handleTouchStart, { passive: false });
+            container.addEventListener('touchmove', handleTouchMove, { passive: false });
+            container.addEventListener('touchend', handleTouchEnd, { passive: false });
+            
+            // Add keyboard navigation
+            document.addEventListener('keydown', handleKeyPress);
         }
 
-        // Initialize when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializeApp);
-        } else {
-            initializeApp();
-        }
+        // Initialize the app when the page loads
+        initializeApp();
     </script>
 </body>
 </html>
