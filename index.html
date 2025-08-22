@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Nature Message</title>
+    <title>NatureNow</title>
     
     <!-- PWA Meta Tags -->
     <meta name="description" content="Daily messages about the natural world and climate change impacts">
@@ -282,20 +282,26 @@
             'fieldfare feeding': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/fieldfare/',
             'redwings': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/redwing/',
             'yellow wagtails': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/yellow-wagtail/',
+            'robins': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/robin/',
             'robin territories': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/robin/',
             'red kites': 'https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/red-kite/',
             
             // Invertebrates
             'common darters': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/dragonflies-and-damselflies/common-darter',
             'migrant hawkers': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/dragonflies-and-damselflies/migrant-hawker',
+            'migrant hawker dragonflies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/dragonflies-and-damselflies/migrant-hawker',
             'painted ladies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/painted-lady',
+            'painted lady butterflies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/painted-lady',
             'speckled woods': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/speckled-wood',
+            'speckled wood butterflies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/speckled-wood',
             'red admirals': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/red-admiral',
+            'red admiral butterflies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/red-admiral',
             'comma butterflies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/comma',
             'peacock butterflies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/peacock',
             'winter moths': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/winter-moth',
             'brimstone butterflies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/brimstone',
             'small coppers': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/small-copper',
+            'small copper butterflies': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/small-copper',
             'hornets': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/bees-wasps-and-ants/hornet',
             'house spiders': 'https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/spiders/house-spider',
             
@@ -309,6 +315,7 @@
             'sloe berries': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/blackthorn',
             'beechnuts': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/beech',
             'ivy flowers': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/ivy',
+            'ivy': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/ivy',
             'conkers': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/horse-chestnut',
             'rosehips': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/dog-rose',
             'meadow saffron': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/meadow-saffron',
@@ -316,6 +323,9 @@
             'haws': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/hawthorn',
             'hornbeam leaves': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/hornbeam',
             'autumn crocuses': 'https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/meadow-saffron',
+            'buddleia flowers': 'https://www.rhs.org.uk/plants/buddleja/growing-guide',
+            'sedum flowers': 'https://www.rhs.org.uk/plants/sedum/growing-guide',
+            'buckthorn bushes': 'https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/purging-buckthorn',
             
             // Fungi
             'waxcap mushrooms': 'https://www.wildlifetrusts.org/wildlife-explorer/fungi/waxcaps',
@@ -331,9 +341,15 @@
             sortedSpecies.forEach(species => {
                 const regex = new RegExp(`\\b${species}\\b`, 'gi');
                 if (regex.test(linkedMessage)) {
-                    linkedMessage = linkedMessage.replace(regex, 
-                        `<a href="${speciesLinks[species]}" target="_blank" rel="noopener noreferrer" style="color: #2980b9; font-weight: 500; text-decoration: underline;">${species}</a>`
-                    );
+                    linkedMessage = linkedMessage.replace(regex, (match, offset) => {
+                        // Check if this is at the start of a sentence (beginning or after '. ')
+                        const isStartOfSentence = offset === 0 || linkedMessage.substring(offset - 2, offset) === '. ';
+                        const displayText = isStartOfSentence ? 
+                            match.charAt(0).toUpperCase() + match.slice(1).toLowerCase() : 
+                            match.toLowerCase();
+                        
+                        return `<a href="${speciesLinks[species]}" target="_blank" rel="noopener noreferrer" style="color: #2980b9; font-weight: 500; text-decoration: underline;">${displayText}</a>`;
+                    });
                 }
             });
             
