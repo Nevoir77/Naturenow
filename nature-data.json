@@ -1,0 +1,293 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww21700\viewh13240\viewkind0
+\deftab720
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f0\fs24 \cf0 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 \{\
+  "messages": [\
+    \{\
+      "date": "22nd August",\
+      "message": "Blackberries ripen in hedgerows, their dark juice staining fingers",\
+      "phenology": "Blackberry ripening occurs 1-2 weeks earlier than in the 1980s, with extended fruiting seasons providing food over longer periods.",\
+      "species": ["blackberries"]\
+    \},\
+    \{\
+      "date": "23rd August", \
+      "message": "Swallows gather on telegraph wires, preparing for their epic journey south",\
+      "phenology": "Swallow departure timing remains relatively stable, but breeding seasons now extend later, with some attempting third broods.",\
+      "species": ["swallows"]\
+    \},\
+    \{\
+      "date": "24th August",\
+      "message": "Rowan berries glow orange-red in mountain woods", \
+      "phenology": "Rowan fruiting has advanced by 10-12 days, affecting the timing of autumn bird migrations that depend on these berries.",\
+      "species": ["rowan berries"]\
+    \},\
+    \{\
+      "date": "25th August",\
+      "message": "Young starlings form chattering flocks in suburban parks",\
+      "phenology": "Starling flock formation occurs earlier as breeding seasons extend, but flock sizes are smaller due to overall population declines.",\
+      "species": ["starlings"]\
+    \},\
+    \{\
+      "date": "26th August",\
+      "message": "Common darters patrol garden ponds in the late summer heat",\
+      "phenology": "Dragonfly activity periods have extended by 2-3 weeks, with some species now active well into October.",\
+      "species": ["common darters"]\
+    \},\
+    \{\
+      "date": "27th August",\
+      "message": "Wild clematis adorns hedges with fluffy seed heads like old man's beard",\
+      "phenology": "Clematis seed dispersal timing has shifted later, extending into autumn and changing winter hedgerow appearance.",\
+      "species": ["wild clematis"]\
+    \},\
+    \{\
+      "date": "28th August",\
+      "message": "Migrant hawker dragonflies hunt over heathland pools",\
+      "phenology": "Hawker dragonflies now emerge 2-3 weeks earlier and remain active longer, overlapping with species not historically sympatric.",\
+      "species": ["migrant hawker dragonflies"]\
+    \},\
+    \{\
+      "date": "29th August",\
+      "message": "House martins gather mud for their late broods under the eaves",\
+      "phenology": "House martins attempt later broods more frequently, but face challenges from reduced insect availability in late summer.",\
+      "species": ["house martins"]\
+    \},\
+    \{\
+      "date": "30th August",\
+      "message": "Hazel nuts ripen green and milky in their leafy cups",\
+      "phenology": "Hazel nut ripening has advanced 7-10 days, sometimes occurring before squirrels have finished with their earlier food sources.",\
+      "species": ["hazel nuts"]\
+    \},\
+    \{\
+      "date": "31st August",\
+      "message": "Painted lady butterflies continue their endless migration across gardens",\
+      "phenology": "Painted lady migrations are becoming more unpredictable, with some populations overwintering in southern Britain.",\
+      "species": ["painted lady butterflies"]\
+    \},\
+    \{\
+      "date": "1st September",\
+      "message": "Speckled wood butterflies dance in dappled woodland clearings",\
+      "phenology": "Speckled woods now produce an additional generation in warmer years, extending their flight period into November.",\
+      "species": ["speckled wood butterflies"]\
+    \},\
+    \{\
+      "date": "2nd September",\
+      "message": "Fieldfares arrive from Scandinavia with harsh chattering calls",\
+      "phenology": "Fieldfare arrival has delayed by 2-3 weeks as northern European autumns warm, shortening their British residence.",\
+      "species": ["fieldfares"]\
+    \},\
+    \{\
+      "date": "3rd September",\
+      "message": "Elderberries hang in heavy purple clusters",\
+      "phenology": "Elder fruiting occurs 10-14 days earlier, with extended seasons but sometimes reduced berry quality in drought years.",\
+      "species": ["elderberries"]\
+    \},\
+    \{\
+      "date": "4th September",\
+      "message": "Red admiral butterflies feast on buddleia flowers in gardens",\
+      "phenology": "Red admirals now overwinter in increasing numbers rather than migrating, changing from migrants to residents.",\
+      "species": ["red admiral butterflies"]\
+    \},\
+    \{\
+      "date": "5th September",\
+      "message": "Crab apples fall pink and yellow beneath ancient trees",\
+      "phenology": "Crab apple fruiting has advanced 8-12 days, affecting wildlife that depend on this autumn food source.",\
+      "species": ["crab apples"]\
+    \},\
+    \{\
+      "date": "6th September",\
+      "message": "Redwings call softly as they arrive from northern forests",\
+      "phenology": "Redwing arrival is delayed by 3-4 weeks, with some populations staying in Scandinavia through milder winters.",\
+      "species": ["redwings"]\
+    \},\
+    \{\
+      "date": "7th September",\
+      "message": "Hornets hunt insects around fallen fruit",\
+      "phenology": "Hornet colonies remain active 3-4 weeks longer than historically, with some surviving mild winters.",\
+      "species": ["hornets"]\
+    \},\
+    \{\
+      "date": "8th September",\
+      "message": "Pink waxcap mushrooms emerge in unimproved grasslands",\
+      "phenology": "Waxcap fruiting periods have become more erratic, with some species appearing earlier but others delayed.",\
+      "species": ["pink waxcap mushrooms"]\
+    \},\
+    \{\
+      "date": "9th September",\
+      "message": "Comma butterflies seek overwintering sites in ivy and brambles",\
+      "phenology": "Comma butterflies now produce additional broods in warm years, with some individuals active into December.",\
+      "species": ["comma butterflies"]\
+    \},\
+    \{\
+      "date": "10th September",\
+      "message": "Sloe berries bloom with blue-white waxy coating",\
+      "phenology": "Sloe ripening has advanced 6-8 days, sometimes occurring before traditional sloe gin making time.",\
+      "species": ["sloe berries"]\
+    \},\
+    \{\
+      "date": "11th September",\
+      "message": "Peacock butterflies gather on sedum flowers, wings brilliant in autumn sun",\
+      "phenology": "Peacock butterflies extend their active period by 2-3 weeks, delaying hibernation in warm autumns.",\
+      "species": ["peacock butterflies"]\
+    \},\
+    \{\
+      "date": "12th September",\
+      "message": "Field mushrooms appear overnight in sheep-grazed pastures",\
+      "phenology": "Mushroom fruiting has become less predictable, with traditional autumn flushes sometimes occurring in summer.",\
+      "species": ["field mushrooms"]\
+    \},\
+    \{\
+      "date": "13th September",\
+      "message": "Winter moths begin emerging for their flightless mating rituals",\
+      "phenology": "Winter moth emergence timing is shifting and extending, with impacts on spring bird breeding that depend on caterpillars.",\
+      "species": ["winter moths"]\
+    \},\
+    \{\
+      "date": "14th September",\
+      "message": "Beechnuts fall in their prickly cases beneath ancient trees",\
+      "phenology": "Beech mast years are becoming more frequent but less predictable, affecting woodland wildlife cycles.",\
+      "species": ["beechnuts"]\
+    \},\
+    \{\
+      "date": "15th September",\
+      "message": "Migrant yellow wagtails gather in stubble fields",\
+      "phenology": "Yellow wagtail migration timing remains stable, but populations decline due to reduced insect abundance.",\
+      "species": ["yellow wagtails"]\
+    \},\
+    \{\
+      "date": "16th September",\
+      "message": "Ivy begins its late flowering, vital for autumn insects",\
+      "phenology": "Ivy flowering occurs 5-7 days earlier, providing crucial late nectar but sometimes finishing before all insects need it.",\
+      "species": ["ivy"]\
+    \},\
+    \{\
+      "date": "17th September",\
+      "message": "Conkers fall glossy and brown from horse chestnut trees",\
+      "phenology": "Conker fall occurs 1-2 weeks earlier, but leaf-miner damage often reduces seed viability.",\
+      "species": ["conkers"]\
+    \},\
+    \{\
+      "date": "18th September",\
+      "message": "Swallows line up on rooftops, their departure imminent",\
+      "phenology": "Swallow departure has become more variable, with some populations leaving 1-2 weeks later than historically.",\
+      "species": ["swallows"]\
+    \},\
+    \{\
+      "date": "19th September",\
+      "message": "Rosehips glow red and orange in hedgerows and gardens",\
+      "phenology": "Rose hip formation occurs earlier but with more variable vitamin C content due to summer temperature stress.",\
+      "species": ["rosehips"]\
+    \},\
+    \{\
+      "date": "20th September",\
+      "message": "Meadow saffron flowers emerge from bare earth without leaves",\
+      "phenology": "Meadow saffron flowering has advanced 8-10 days, sometimes completing before optimal soil conditions develop.",\
+      "species": ["meadow saffron"]\
+    \},\
+    \{\
+      "date": "21st September",\
+      "message": "House spiders emerge seeking mates in autumn corners",\
+      "phenology": "Spider mating seasons have extended by 2-3 weeks, with activity continuing later into autumn.",\
+      "species": ["house spiders"]\
+    \},\
+    \{\
+      "date": "22nd September",\
+      "message": "Acorns ripen and fall beneath oak trees",\
+      "phenology": "Acorn production cycles are becoming more erratic, with climate stress affecting oak reproductive success.",\
+      "species": ["acorns"]\
+    \},\
+    \{\
+      "date": "23rd September",\
+      "message": "Brimstone butterflies seek buckthorn bushes for egg-laying",\
+      "phenology": "Brimstone egg-laying extends later into autumn, but larval development faces unpredictable spring timing.",\
+      "species": ["brimstone butterflies"]\
+    \},\
+    \{\
+      "date": "24th September",\
+      "message": "Robins sing territorial songs as they establish winter territories",\
+      "phenology": "Robin territory establishment occurs 1-2 weeks earlier, with winter singing periods extending longer.",\
+      "species": ["robins"]\
+    \},\
+    \{\
+      "date": "25th September",\
+      "message": "Haws ripen red on hawthorn branches",\
+      "phenology": "Hawthorn berry ripening has advanced 5-8 days, affecting birds that time migration with this food source.",\
+      "species": ["haws"]\
+    \},\
+    \{\
+      "date": "26th September",\
+      "message": "Small copper butterflies bask on sedum flowers",\
+      "phenology": "Small coppers now produce additional broods, with some flying into November in warm years.",\
+      "species": ["small copper butterflies"]\
+    \},\
+    \{\
+      "date": "27th September",\
+      "message": "Fieldfares strip berry bushes with their harsh calls",\
+      "phenology": "Fieldfare feeding behavior changes as berry ripening times shift, forcing adaptation to new food sequences.",\
+      "species": ["fieldfares"]\
+    \},\
+    \{\
+      "date": "28th September",\
+      "message": "Hornbeam leaves turn yellow-gold in ancient woodlands",\
+      "phenology": "Hornbeam leaf color change occurs 6-8 days later, with autumn colors less intense in warm years.",\
+      "species": ["hornbeam leaves"]\
+    \},\
+    \{\
+      "date": "29th September",\
+      "message": "Red kites soar over valleys, their numbers slowly recovering",\
+      "phenology": "Red kite breeding seasons extend longer, but extreme weather events during nesting affect success rates.",\
+      "species": ["red kites"]\
+    \},\
+    \{\
+      "date": "30th September",\
+      "message": "Autumn crocuses push through fallen leaves in ancient meadows",\
+      "phenology": "Autumn crocus flowering has become more unpredictable, with some populations flowering weeks apart.",\
+      "species": ["autumn crocuses"]\
+    \}\
+  ],\
+  "speciesLinks": \{\
+    "swallows": "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/swallow/",\
+    "starlings": "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/starling/",\
+    "house martins": "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/house-martin/",\
+    "fieldfares": "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/fieldfare/",\
+    "redwings": "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/redwing/",\
+    "yellow wagtails": "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/yellow-wagtail/",\
+    "robins": "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/robin/",\
+    "red kites": "https://www.rspb.org.uk/birds-and-wildlife/wildlife-guides/bird-a-z/red-kite/",\
+    "common darters": "https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/dragonflies/common-darter",\
+    "migrant hawker dragonflies": "https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/dragonflies/migrant-hawker",\
+    "painted lady butterflies": "https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/painted-lady",\
+    "speckled wood butterflies": "https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/speckled-wood",\
+    "red admiral butterflies": "https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/red-admiral",\
+    "comma butterflies": "https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/comma",\
+    "peacock butterflies": "https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/peacock",\
+    "winter moths": "https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/moths/winter-moth",\
+    "brimstone butterflies": "https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/brimstone",\
+    "small copper butterflies": "https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/butterflies-and-moths/small-copper",\
+    "hornets": "https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/bees-wasps-and-ants/hornet",\
+    "house spiders": "https://www.wildlifetrusts.org/wildlife-explorer/invertebrates/spiders/giant-house-spider",\
+    "blackberries": "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/plants/wild-flowers/bramble/",\
+    "rowan berries": "https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/rowan",\
+    "wild clematis": "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/plants/wild-flowers/travellers-joy/",\
+    "hazel nuts": "https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/hazel",\
+    "elderberries": "https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/elder",\
+    "crab apples": "https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/crab-apple",\
+    "sloe berries": "https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/blackthorn",\
+    "beechnuts": "https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/common-beech",\
+    "ivy": "https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/ivy",\
+    "conkers": "https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/horse-chestnut",\
+    "rosehips": "https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/dog-rose",\
+    "meadow saffron": "https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/meadow-saffron",\
+    "acorns": "https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/english-oak",\
+    "haws": "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/british-trees/a-z-of-british-trees/hawthorn/",\
+    "hornbeam leaves": "https://www.wildlifetrusts.org/wildlife-explorer/trees-and-shrubs/common-hornbeam",\
+    "autumn crocuses": "https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/meadow-saffron",\
+    "pink waxcap mushrooms": "https://www.wildlifetrusts.org/wildlife-explorer/fungi/pink-waxcap",\
+    "field mushrooms": "https://totallywilduk.co.uk/2022/01/17/field-mushroom-agaricus-campestris-identification/"\
+  \}\
+\}}
