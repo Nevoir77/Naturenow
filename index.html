@@ -666,36 +666,6 @@
         } else {
             initializeApp();
         }
-// Get today's date and set it as default
-function setTodayAsDefault() {
-    const today = new Date();
-    const day = today.getDate();
-    const month = today.getMonth() + 1; // JavaScript months are 0-indexed
-    
-    // Format as "23rd August" or whatever format you're using
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"];
-    
-    const dayWithSuffix = day + getDaySuffix(day);
-    const monthName = monthNames[month - 1];
-    const todayFormatted = `${dayWithSuffix} ${monthName}`;
-    
-    // Set this as the active/selected date in your app
-    displayContentForDate(todayFormatted);
-}
-
-function getDaySuffix(day) {
-    if (day >= 11 && day <= 13) return "th";
-    switch (day % 10) {
-        case 1: return "st";
-        case 2: return "nd"; 
-        case 3: return "rd";
-        default: return "th";
-    }
-}
-
-// Call this when the page loads
-window.addEventListener('DOMContentLoaded', setTodayAsDefault);
     </script>
 </body>
 </html>
